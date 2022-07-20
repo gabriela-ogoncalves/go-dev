@@ -1,10 +1,41 @@
-# Getting Started with Create React App
+# Go Dev!
+![node version](https://img.shields.io/static/v1?label=node&message=v16.16.0&color=blue)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto de final de curso, feito por [Gabriela Gonçalves](https://github.com/gabriela-ogoncalves) e Marco Paulo Cardoso, com as tecnologias:
+- [React JS](https://github.com/facebook/create-react-app)
+- [XXX]()
+- [YYY]()
+- [ZZZ]()
 
-## Available Scripts
+Implementamos uma plataforma de ensino de programação para pessoas leigas, curiosas, que estão ingressando agora na área de Tecnologia da Informação e para quem deseja aprofundar conceitos. Baseado no conceito do Duolingo, com o Go Dev você pode aprender programação brincando.
 
-In the project directory, you can run:
+## Configurando o projeto
+
+Para configurar o projeto, você precisa rodar o comando abaixo:
+
+```(shell)
+make setup
+```
+
+## Rodando o projeto
+
+Você pode rodar o projeto utilizando o comando abaixo no seu terminal:
+
+```(shell)
+make run
+```
+
+Para visualizar no navegador, acesse a URL [`http://localhost:3000`](http://localhost:3000).
+
+## Testes
+
+Foram implementados testes unitários, que podem ser executados através do comando:
+
+```(shell)
+make test
+```
+
+-----------------------------------------------------------------------------------------
 
 ### `npm start`
 
