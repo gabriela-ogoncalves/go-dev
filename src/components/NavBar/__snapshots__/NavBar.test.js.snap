@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar Deve renderizar o componente normalmente 1`] = `
+<article
+  data-testid="nav-bar"
+>
+  <nav
+    class="nav"
+  >
+    <a
+      class="site-title"
+      data-testid="go-dev-logo"
+      href="/"
+    >
+      <img
+        alt="Logo Go Dev"
+        class="logo-image"
+        src="go-dev-logo.png"
+      />
+    </a>
+    <ul>
+      <li
+        class=""
+      >
+        <a
+          href="/trilhas"
+          role="link"
+        >
+          Trilhas
+        </a>
+      </li>
+      <li
+        class=""
+      >
+        <a
+          href="/certificados"
+          role="link"
+        >
+          Certificados
+        </a>
+      </li>
+    </ul>
+  </nav>
+</article>
+`;
