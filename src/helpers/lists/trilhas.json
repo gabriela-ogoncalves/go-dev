@@ -1,0 +1,62 @@
+[
+  {
+    "nome": "Python",
+    "qtdAulas": 20,
+    "qtdExercicios": 50,
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png"
+  },
+  {
+    "nome": "JavaScript",
+    "qtdAulas": 30,
+    "qtdExercicios": 60,
+    "logo": "https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
+  },
+  {
+    "nome": "TypeScript",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+  },
+  {
+    "nome": "Ruby",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/1024px-Ruby_logo.svg.png"
+  },
+  {
+    "nome": "Goland",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://cdn.worldvectorlogo.com/logos/golang-gopher.svg"
+  },
+  {
+    "nome": "Swift",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://dwglogo.com/wp-content/uploads/2017/04/Swift_logo_01.png"
+  },
+  {
+    "nome": "Kotlin",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png"
+  },
+  {
+    "nome": "C",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://cdn.worldvectorlogo.com/logos/c-1.svg"
+  },
+  {
+    "nome": "C#",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png"
+  },
+  {
+    "nome": "Java",
+    "qtdAulas": 25,
+    "qtdExercicios": 45,
+    "logo": "https://logos-world.net/wp-content/uploads/2022/07/Java-Logo.png"
+  }
+]
