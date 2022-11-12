@@ -1,3 +1,13 @@
+@import url('https://fonts.cdnfonts.com/css/bungee');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+
+:root {
+  --go-dev-background: #E3CAE8;
+  --go-dev-text: #1C2436;
+  --go-dev-border: #734A99;
+  --bungee-font: 'Bungee', sans-serif;
+  --poppins-font: 'Poppins', sans-serif;
+}
 
 * {
   box-sizing: border-box;
