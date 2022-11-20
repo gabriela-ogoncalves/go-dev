@@ -5,7 +5,6 @@ import './styles.scss';
 export default function Card(props) {
   const { nome, area, logo, qtdAulas, qtdExercicios } = props.item;
   
-  // console.log('teste', teste);
   return (
     <div className='wrapper'>
       <div className='trilha'>
