@@ -2,29 +2,35 @@ import React from 'react';
 
 import './styles.scss';
 
-export default function Card() {
-  // const { nome, logo, qtdAulas, qtdExercicios } = props.item;
-
+export default function Card(props) {
+  const { nome, area, logo, qtdAulas, qtdExercicios } = props.item;
+  
+  // console.log('teste', teste);
   return (
-    <div className="wrapper">
-      <div className="card">
-        <div className="card__user__image">
-          <img className="card__user__avatar" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png" alt="" />
+    <div className='wrapper'>
+      <div className='trilha'>
+       <div className="trilha__image">
+        <img className="trilha__image__avatar" src={logo} alt="Logo da trilha" />
+      </div>
+
+      <div className="trilha__text"> 
+        <div className="trilha__text__name">
+          {nome}
         </div>
-        <div className="card__text__container"> 
-          <div className="card__text__user">
-          JavaScript
-          </div>
-          <div className="card__text__job">
-            Front-End
-          </div>
-          <div className="card__text__about">
-            A person with passion for web designing and a great enthuiast of coding.....
-          </div>
-          <a href="?" className="btn btn__hire">
-            Saiba mais
-          </a>
+        
+        <div className="trilha__text__area">
+          {area}
         </div>
+       
+        <div className="trilha__text__info">
+          <span>{qtdAulas} aulas</span>
+          <span>{qtdExercicios} exercícios</span>
+        </div>
+
+        <a href="?" className="trilha__button">
+          Saiba mais
+        </a>
+      </div>
       </div>
     </div>
   );
