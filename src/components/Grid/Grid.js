@@ -18,7 +18,8 @@ import Card from '../Card/Card';
 
 export default function TrilhasGrid() {
   return (
-    <>
+    <section className='trilhas'>
+      <div className='title-grid'>Confira algumas das nossas trilhas</div>
       <Swiper
         slidesPerView={isMobile ? 2 : 4}
         grid={{ rows: isMobile ? 1 : 2 }}
@@ -36,6 +37,6 @@ export default function TrilhasGrid() {
             );
           })}
       </Swiper>
-    </>
+    </section>
   );
 }
