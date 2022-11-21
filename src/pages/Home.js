@@ -1,11 +1,11 @@
-// import Carousel from '../components/Carousel/Carousel'
+import Banner from '../components/Banner/Banner';
 import TrilhasGrid from '../components/Grid/Grid';
 
 const Home = () => {
   return (
     <div data-testid='home'>
-      <h1>HOME</h1>
-      {/* <Carousel /> */}
+      {/* <h1>HOME</h1> */}
+      <Banner />
       <TrilhasGrid />
       <h1>HOME</h1>
       <h1>HOME</h1>

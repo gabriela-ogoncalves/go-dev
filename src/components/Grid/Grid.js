@@ -12,22 +12,19 @@ import './styles.scss';
 // import required modules
 import { Grid, Pagination } from 'swiper';
 import { isMobile } from '../../helpers/utils';
-import Trilha from '../Trilha/Trilha';
 
-import trilhas from '../../helpers/lists/trilhas.json';
+import {trilhas} from '../../helpers/lists/trilhas';
+import Card from '../Card/Card';
 
 export default function TrilhasGrid() {
   return (
-    <>
+    <section className='trilhas'>
+      <div className='title-grid'>Confira algumas das nossas trilhas</div>
       <Swiper
         slidesPerView={isMobile ? 2 : 4}
-        grid={{
-          rows: 2,
-        }}
+        grid={{ rows: isMobile ? 1 : 2 }}
         spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={{ clickable: true }}
         modules={[Grid, Pagination]}
         className="mySwiper"
       >
@@ -35,11 +32,11 @@ export default function TrilhasGrid() {
           trilhas && trilhas.map((item, i) => {
             return (
               <SwiperSlide key={i}>
-                <Trilha item={item} />
+                <Card item={item}/>
               </SwiperSlide>
             );
           })}
       </Swiper>
-    </>
+    </section>
   );
 }
