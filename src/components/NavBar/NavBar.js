@@ -1,34 +1,61 @@
+import { useState } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import './styles.scss';
+
 import logo from '../../assets/logo/go-dev-logo.png';
+import MenuIcon from './MenuIcon';
+
+import './styles.scss';
 
 const NavBar = () => {
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavExpanded(!isNavExpanded);
+  };
+
   return (
     <article data-testid='nav-bar'>
-      <nav className='nav'>
-        <Link to='/' data-testid='go-dev-logo' className='site-title'>
-          <img src={logo} alt='Logo Go Dev' className="logo-image" />
-        </Link>
-        <ul>
-          <CustomLink role='link' href='/trilhas'>Trilhas</CustomLink>
-          <CustomLink role='link' href='/certificados'>Certificados</CustomLink>
-        </ul>
+      <nav className='navigation'>
+          <Link
+              to='/'
+              data-testid='go-dev-logo'
+              className='brand-name'
+          >
+              <img src={logo} alt='Logo Go Dev' className="logo-image" />
+          </Link>
+
+        <button
+          className='hamburger'
+          onClick={toggleNav}
+        >
+          <MenuIcon />
+        </button>
+        <div
+          className={
+            isNavExpanded ? 'navigation-menu expanded' : 'navigation-menu'
+          }
+        >
+          <ul>
+            <CustomLink onClick={toggleNav} role='link' href='/trilhas'>Trilhas</CustomLink>
+            <CustomLink onClick={toggleNav} role='link' href='/certificados'>Certificados</CustomLink>
+          </ul>
+        </div>
       </nav>
     </article>
   );
 };
 
 const CustomLink = ({ href, children, ...props }) => {
-  const path = useResolvedPath(href);
-  const isActive = useMatch({ path: path.pathname, end: true });
+    const path = useResolvedPath(href);
+    const isActive = useMatch({ path: path.pathname, end: true });
 
-  return (
-    <li className={isActive ? 'active' : ''}>
-      <Link to={href} {...props}>
-        {children}
-      </Link>
-    </li>
-  );
+    return (
+        <li className={isActive ? 'active' : ''}>
+        <Link to={href} {...props}>
+            {children}
+        </Link>
+        </li>
+    );
 };
 
 export default NavBar;
