@@ -5,7 +5,7 @@ export default function Banner() {
         <section className='banner'>
             <div className='banner__image'></div>
             <div className='banner__text'>
-                <div className='banner__text__title'>Aprendendo programação brincando!</div>
+                <div className='banner__text__title'>Aprenda programação brincando!</div>
                 <div className='banner__text__info'>
                     <span>
                         O Go Dev é uma aplicação feita para você que quer aprender programação.
