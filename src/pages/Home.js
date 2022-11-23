@@ -1,5 +1,6 @@
 import Banner from '../components/Banner/Banner';
 import TrilhasGrid from '../components/Grid/Grid';
+import Informative from '../components/Informative/Informative';
 
 const Home = () => {
   return (
@@ -7,9 +8,7 @@ const Home = () => {
       {/* <h1>HOME</h1> */}
       <Banner />
       <TrilhasGrid />
-      <h1>HOME</h1>
-      <h1>HOME</h1>
-      <h1>HOME</h1>
+      <Informative />
     </div>
   );
 };
