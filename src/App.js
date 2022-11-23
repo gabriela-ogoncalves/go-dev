@@ -5,6 +5,7 @@ import Trilhas from './pages/Trilhas';
 import About from './pages/About';
 
 import './App.scss';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/about' element={<About />} />
         </Routes>
       </div>
+      <Footer />
     </>
   );
 }
