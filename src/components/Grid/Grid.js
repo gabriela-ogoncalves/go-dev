@@ -22,6 +22,7 @@ export default function TrilhasGrid() {
       <div className='title-grid'>Confira algumas das nossas trilhas</div>
       <Swiper
         slidesPerView={isMobile ? 2 : 4}
+        slidesPerGroup={isMobile ? 2 : 1}
         grid={{ rows: isMobile ? 1 : 2 }}
         spaceBetween={20}
         pagination={{ clickable: true }}
