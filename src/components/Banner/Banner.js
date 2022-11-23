@@ -8,9 +8,9 @@ export default function Banner() {
                 <div className='banner__text__title'>Aprenda programação brincando!</div>
                 <div className='banner__text__info'>
                     <span>
-                        O Go Dev é uma aplicação feita para você que quer aprender programação.
-                        Aqui tudo é dividido em trilhas, que contêm aulas e exercícios.
-                        Ao final de cada trilha, você adquire uma boa base prática e teórica, além de ter a oportunidade de garantir seu certificado.
+                        Go Dev é feito para você que quer aprender ou aprofundar os conhecimentos de programação.
+                        Temos trilhas sobre vários assuntos divididas em aulas e exercícios.
+                        Além de adquirir uma boa base prática e teórica, você pode garantir seu certificado.
                     </span>
                     <a href='/trilhas' role='button'>Quero conhecer as trilhas!</a>
                 </div>
