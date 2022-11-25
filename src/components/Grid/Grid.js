@@ -13,24 +13,26 @@ import './styles.scss';
 import { Grid, Pagination } from 'swiper';
 import { isMobile } from '../../helpers/utils';
 
-import {trilhas} from '../../helpers/lists/trilhas';
 import Card from '../Card/Card';
 
-export default function TrilhasGrid() {
+export default function TrilhasGrid(props) {
+  const {title, items, row, style, titleStyle} = props;
+  const gridRow = isMobile ? 1 : 2;
+
   return (
     <section className='trilhas'>
-      <div className='title-grid'>Confira algumas das nossas trilhas</div>
+      <div className={titleStyle || 'title-grid'} >{title}</div>
       <Swiper
         slidesPerView={isMobile ? 2 : 4}
         slidesPerGroup={isMobile ? 2 : 1}
-        grid={{ rows: isMobile ? 1 : 2 }}
+        grid={{ rows: row || gridRow }}
         spaceBetween={20}
         pagination={{ clickable: true }}
         modules={[Grid, Pagination]}
-        className="mySwiper"
+        className={style}
       >
         {
-          trilhas && trilhas.map((item, i) => {
+          items && items.map((item, i) => {
             return (
               <SwiperSlide key={i}>
                 <Card item={item}/>

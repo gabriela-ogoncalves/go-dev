@@ -1,15 +1,15 @@
 import Banner from '../components/Banner/Banner';
 import TrilhasGrid from '../components/Grid/Grid';
 import Informative from '../components/Informative/Informative';
+import { trilhas } from '../helpers/lists/trilhas';
 
 const Home = () => {
   return (
-    <div data-testid='home'>
-      {/* <h1>HOME</h1> */}
+    <section data-testid='home'>
       <Banner />
-      <TrilhasGrid />
+      <TrilhasGrid title='Confira algumas das nossas trilhas' items={trilhas} />
       <Informative />
-    </div>
+    </section>
   );
 };
 
