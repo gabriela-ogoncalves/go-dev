@@ -8,7 +8,7 @@
   padding: 18px 0;
 
   @media only screen and (max-width: 700px) {
-    height: 93%;
+    height: 95%;
   }
 }
 
@@ -86,7 +86,6 @@
     border-radius: 40px;
     font-size: 13px;
     letter-spacing: 1px;
-    z-index: 100;
     transition: 300ms ease;
 
     &:hover {
@@ -111,5 +110,44 @@
       z-index: -1;
       transition: 300ms ease;
     }
+  }
+
+  &__status {
+    position: absolute;
+    margin: -1rem;
+    bottom: 34px;
+    left: 16px;
+    width: 100%;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    &__progress {
+      width: auto;
+      padding: 0.5rem;
+      background-color: #AAA;
+      border-radius: 0 0 10px 10px;
+    }
+
+    &__done {
+      width: auto;
+      padding: 0.5rem;
+      background-color: var(--success-color);
+      border-radius: 0 0 10px 10px;
+    }
+
+    &__image {
+      position: absolute;
+      top: -58px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      img {
+        width: 44px;
+        height: 30px;
+      }
+    }
+    
   }
 }
