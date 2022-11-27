@@ -1,0 +1,83 @@
+#certificado-item {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 2.4rem 0;
+
+  .item {
+    color: black;
+    background-color: white;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    text-align: center;
+    width: 80%;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    height: max-content;
+
+    @media only screen and (min-width: 1024px) {
+      width: 70%;
+    }
+
+    @media only screen and (max-width: 700px) {
+      width: 100%;
+    }
+
+    .container {
+      padding: 1.5rem;
+      border: 18px solid var(--go-dev-border);
+      border-radius: 12px;
+      vertical-align: middle;
+      text-align: -webkit-center;
+      margin: 0;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      height: 100%;
+      width: 100%;
+
+      img {
+        height: 50px;
+        width: 105px;  
+      }
+    }
+    
+    .marquee {
+      color: var(--go-dev-border);
+      font-size: 48px;
+      margin: 20px;
+
+      @media only screen and (max-width: 400px) {
+        font-size: 38px;
+      }    
+    }
+
+    .assignment {
+        margin: 20px;
+    }
+
+    .person {
+        border-bottom: 2px solid black;
+        font-size: 32px;
+        font-style: italic;
+        margin: 20px auto;
+        max-width: 70%;
+    }
+    .reason {
+        margin: 20px;
+        line-height: 32px;
+    }
+
+    .signature {
+      margin-top: 2rem;
+
+      img {
+        width: 150px;
+        height: 40px;
+      }
+    }
+  }
+}
