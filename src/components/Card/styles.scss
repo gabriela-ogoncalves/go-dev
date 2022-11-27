@@ -87,6 +87,7 @@
     font-size: 13px;
     letter-spacing: 1px;
     transition: 300ms ease;
+    z-index: 1;
 
     &:hover {
       &::before {  
