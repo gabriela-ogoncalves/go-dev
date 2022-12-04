@@ -27,7 +27,7 @@ export default function Card(props) {
           <span>{qtdExercicios} exercícios</span>
         </div>
 
-        <a href="?" className="trilha__button">
+        <a href={`/trilhas/resumo/${nome.toLowerCase()}`} className="trilha__button">
           Saiba mais
         </a>
 
