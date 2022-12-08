@@ -20,7 +20,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
     'quotes': ['error', 'single'],
     'semi': [2, 'always']
     // 'semi': ['error', 'never']
