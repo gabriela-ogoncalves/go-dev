@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .tool-versions
+.idea/
+.vscode/
+api/mvnw
+api/mvnw.cmd
+api/.mvn
