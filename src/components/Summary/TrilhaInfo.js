@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { getStatus } from '../../helpers/utils';
+
+import TrilhaHeader from './TrilhaHeader';
+
 import './styles.scss';
 
 const TrilhaInfo = ({info}) => {
@@ -8,10 +11,7 @@ const TrilhaInfo = ({info}) => {
 
   return(
     <section id='summary-trilha-info' >
-      <div className='info-header'>
-        <span className='info-header__name'>{nome}</span>
-        <img src={logo} className='info-header__image' />
-      </div>
+      <TrilhaHeader name={nome} logo={logo} />
 
       <div className='info-status'>
         <span 

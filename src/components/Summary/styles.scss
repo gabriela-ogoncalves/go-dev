@@ -2,27 +2,27 @@
   margin-bottom: 3.5rem;
 }
 
-#summary-trilha-info {
+.info-header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 2rem 0;
+  width: 100%;
+  height: auto;
 
-  .info-header {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin: 2rem 0;
-    width: 100%;
-    height: auto;
-  
-    &__name {
-      font-size: 32px;
-      font-weight: 500;
-    }
-
-    &__image {
-      width: 62px;
-      height: 44px;
-      padding-left: 1rem;
-    }
+  &__name {
+    font-size: 32px;
+    font-weight: 500;
   }
+
+  &__image {
+    width: 62px;
+    height: 44px;
+    padding-left: 1rem;
+  }
+}
+
+#summary-trilha-info {
 
   .info-status {
     display: flex;

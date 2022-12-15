@@ -6,9 +6,12 @@ import About from './pages/About';
 import Certificados from './pages/Certificados';
 import Summary from './pages/Summary';
 import Cadastro from './pages/Cadastro';
+import Aula from './pages/Aula';
+import Exercicio from './pages/Exercicio';
+
+import Footer from './components/Footer/Footer';
 
 import './App.scss';
-import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/certificados' element={<Certificados />} />
           <Route path='trilhas/resumo/:trilha' element={<Summary />} />
+          <Route path='trilhas/:trilha/aulas/:aula' element={<Aula />} />
+          <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
         </Routes>
       </div>
       <Footer />

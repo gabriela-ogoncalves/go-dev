@@ -20,7 +20,7 @@ const Wrapper = styled.article`
   }
 `;
 
-const Circle = styled.div`
+const Circle = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,6 +33,12 @@ const Circle = styled.div`
   width: 2.5rem;
   height: 2.5rem;
   box-shadow: 2px 1px 5px 2px rgb(0 0 0 / 60%);
+  text-decoration: none;
+  border: ${
+    props => props.currentItem 
+      ? '3px solid var(--go-dev-text)' 
+      : ''
+  }
 `;
 
 const Text = styled.span`

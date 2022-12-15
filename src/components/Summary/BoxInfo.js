@@ -12,7 +12,10 @@ const BoxInfo = (props) => {
       <fieldset>
         <legend>{title}</legend>
         <Number
+          name={props.info.nome}
+          type={type}
           items={type === 'aulas' ? aulas : exercicios}
+          currentItem={props.currentItem}
         />
       </fieldset>
     </section>
