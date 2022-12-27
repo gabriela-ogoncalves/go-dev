@@ -38,6 +38,7 @@ const NavBar = () => {
           <ul>
             <CustomLink onClick={toggleNav} role='link' href='/trilhas'>Trilhas</CustomLink>
             <CustomLink onClick={toggleNav} role='link' href='/certificados'>Certificados</CustomLink>
+            <CustomLink onClick={toggleNav} role='link' href='/login'>Login</CustomLink>
           </ul>
         </div>
       </nav>

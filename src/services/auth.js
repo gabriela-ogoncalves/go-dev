@@ -2,31 +2,54 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api/auth/';
 
-class AuthService {
-  login(username, password) {
-    return axios
-      .post(`${API_URL}signin`, { username, password })
-      .then(response => {
-        if (response.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(response.data));
+const register = (username, email, password) => {
+  return axios.post(API_URL + 'signup', {
+    username,
+    email,
+    password,
+  });
+};
 
-        return response.data;
-      });
+const login = (username, password) => {
+  return axios
+    .post(API_URL + 'signin', {
+      username,
+      password,
+    })
+    .then((response) => {
+      if (response.data.accessToken) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
+
+      return response.data;
+    });
+};
+
+const logout = () => {
+  localStorage.removeItem('user');
+};
+
+
+const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem('user'));
+};
+
+const getAuthHeader = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user && user.accessToken) {
+    return { Authorization: 'Bearer ' + user.accessToken };
+  } else {
+    return {};
   }
+};
 
-  logout() {
-    localStorage.removeItem('user');
-  }  
+const AuthService = {
+  register,
+  login,
+  logout,
+  getCurrentUser,
+  getAuthHeader
+};
 
-  register(username, email, password) {
-    return axios.post(`${API_URL}signup`, {username, email, password});
-  }
-
-  getCurrentUser() {
-    const userStr = localStorage.getItem('user');
-    if (userStr) return JSON.parse(userStr);
-    return null;
-  }
-}
-
-export default new AuthService();
+export default AuthService;

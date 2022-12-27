@@ -28,3 +28,4 @@ yarn-error.log*
 api/mvnw
 api/mvnw.cmd
 api/.mvn
+api/create.sql

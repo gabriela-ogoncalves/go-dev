@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Trilhas from './pages/Trilhas';
 import About from './pages/About';
 import Certificados from './pages/Certificados';
@@ -20,6 +21,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/cadastro' element={<Cadastro />} />
           <Route path='/trilhas' element={<Trilhas />} />
           <Route path='/about' element={<About />} />
