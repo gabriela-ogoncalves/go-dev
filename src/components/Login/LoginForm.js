@@ -9,7 +9,7 @@ export default function LoginForm() {
 
   const onSubmit = async data => {
     try {
-      await AuthService.login(data.email, data.password);
+      await AuthService.login(data.username, data.password);
       navigate('/');
       window.location.reload();
     } catch (e) {
@@ -32,32 +32,32 @@ export default function LoginForm() {
         clearErrors();
         handleSubmit(onSubmit)(e);
       }}>
-        <label htmlFor='email'>email</label>
+        <label htmlFor='username'>username</label>
         <input
-          id='email'
-          type='email'
-          {...register('email', {
-            required: true,
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: 'Insira um e-mail válido.'
-            }
+          id='username'
+          type='username'
+          {...register('username', {
+            required: {
+              value: true,
+              message: 'username required'
+            },
           })}
         />
-        {errors.email && <span role='alert'>{errors.email.message}</span>}
+        {errors.username && <span role='alert'>{errors.username.message}</span>}
+
         <label htmlFor='password'>password</label>
         <input
           id='password'
           type='password'
           {...register('password', {
-            required: 'required',
-            minLength: {
-              value: 6,
-              message: 'min length is 5'
-            }
+            required: {
+              value: true,
+              message: 'password required'
+            },
           })}
         />
         {errors.password && <span role='alert'>{errors.password.message}</span>}
+
         <button type='submit'>Login</button>
         {errors.login && errors.login.message}
       </form>
