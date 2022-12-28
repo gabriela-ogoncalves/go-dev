@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/Auth.js';
+import './styles.scss';
 
 export default function LoginForm() {
   let navigate = useNavigate();
@@ -27,40 +28,54 @@ export default function LoginForm() {
   };
 
   return (
-    <div>
-      <form onSubmit={e => {
-        clearErrors();
-        handleSubmit(onSubmit)(e);
-      }}>
-        <label htmlFor='username'>username</label>
-        <input
-          id='username'
-          type='username'
-          {...register('username', {
-            required: {
-              value: true,
-              message: 'username required'
-            },
-          })}
-        />
-        {errors.username && <span role='alert'>{errors.username.message}</span>}
+    <div className='login'>
+      <div className='login__form'>
+        <form onSubmit={e => {
+          clearErrors();
+          handleSubmit(onSubmit)(e);
+        }}>
+          <div>
+            <input
+              id='username'
+              type='username'
+              placeholder='Usuário'
+              className='login__input'
+              {...register('username', {
+                required: {
+                  value: true,
+                  message: 'username required'
+                },
+              })}
+            />
+          </div>
+          <div className='login__error'>
+            {errors.username && <span role='alert'>{errors.username.message}</span>}
+          </div>
 
-        <label htmlFor='password'>password</label>
-        <input
-          id='password'
-          type='password'
-          {...register('password', {
-            required: {
-              value: true,
-              message: 'password required'
-            },
-          })}
-        />
-        {errors.password && <span role='alert'>{errors.password.message}</span>}
+          <div>
+            <input
+              id='password'
+              type='password'
+              placeholder='Senha'
+              className='login__input'
+              {...register('password', {
+                required: {
+                  value: true,
+                  message: 'password required'
+                },
+              })}
+            />
+          </div>
+          <div className='login__error'>
+            {errors.password && <span role='alert'>{errors.password.message}</span>}
+          </div>
 
-        <button type='submit'>Login</button>
-        {errors.login && errors.login.message}
-      </form>
+          <button className='login__button' type='submit'>Login</button>
+          <div className='login__error'>
+            {errors.login && errors.login.message}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
