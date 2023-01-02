@@ -1,4 +1,4 @@
-package com.godev.security.services;
+package com.godev.services;
 
 import com.godev.models.User;
 import com.godev.repository.UserRepository;

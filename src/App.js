@@ -9,6 +9,7 @@ import Summary from './pages/Summary';
 import Cadastro from './pages/Cadastro';
 import Aula from './pages/Aula';
 import Exercicio from './pages/Exercicio';
+import Profile from './pages/Profile';
 
 import Footer from './components/Footer/Footer';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/trilhas' element={<Trilhas />} />
           <Route path='/about' element={<About />} />
           <Route path='/certificados' element={<Certificados />} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='trilhas/resumo/:trilha' element={<Summary />} />
           <Route path='trilhas/:trilha/aulas/:aula' element={<Aula />} />
           <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />

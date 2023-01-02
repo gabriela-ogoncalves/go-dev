@@ -2,7 +2,7 @@ package com.godev.security;
 
 import com.godev.security.auth.AuthEntryPoint;
 import com.godev.security.auth.AuthTokenFilter;
-import com.godev.security.services.UserDetailsServiceImpl;
+import com.godev.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,25 +1,26 @@
 package com.godev.controllers;
 
+import com.godev.payloads.LoginRequest;
+import com.godev.payloads.ProfileRequest;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test")
-public class TestController {
+@RequestMapping("/api/profile")
+public class ProfileController {
     @GetMapping("/all")
     public String allAccess() {
         return "Public Content.";
     }
 
-    @GetMapping("/user")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public String userAccess() {
-        return "User Content.";
-    }
+//    @PostMapping("/user")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//    public ResponseEntity<?> userProfile(@Valid @RequestBody ProfileRequest profileRequest) {
+//        return "User Content.";
+//    }
 
     @GetMapping("/mod")
     @PreAuthorize("hasRole('MODERATOR')")

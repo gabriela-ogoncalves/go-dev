@@ -1,6 +1,6 @@
 package com.godev.security.auth;
 
-import com.godev.security.services.UserDetailsImpl;
+import com.godev.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

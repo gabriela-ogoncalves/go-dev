@@ -10,7 +10,7 @@ import com.godev.payloads.SignupRequest;
 import com.godev.repository.RoleRepository;
 import com.godev.repository.UserRepository;
 import com.godev.security.auth.JwtUtils;
-import com.godev.security.services.UserDetailsImpl;
+import com.godev.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

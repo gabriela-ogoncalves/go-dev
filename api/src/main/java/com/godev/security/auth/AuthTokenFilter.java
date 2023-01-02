@@ -1,6 +1,6 @@
 package com.godev.security.auth;
 
-import com.godev.security.services.UserDetailsServiceImpl;
+import com.godev.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
