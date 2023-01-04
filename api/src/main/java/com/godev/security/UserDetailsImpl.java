@@ -1,4 +1,4 @@
-package com.godev.services;
+package com.godev.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.godev.models.User;

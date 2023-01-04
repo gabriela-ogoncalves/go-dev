@@ -4,14 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 
 public class ProfileRequest {
     @NotBlank
-    private long userid;
+    private String username;
 
-    public long getUserid() {
-        return userid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserid(long userid) {
-        this.userid = userid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
 
