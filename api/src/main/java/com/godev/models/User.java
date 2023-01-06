@@ -26,6 +26,12 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_lesson", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "lesson_id"))
+    private Set<Lesson> lessons = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_exercise", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exercise_id"))
+    private Set<Exercise> exercises = new HashSet<>();
 
     public User() {
     }
@@ -75,4 +81,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Set<Lesson> getLessons() { return lessons; }
+
+    public void setLessons(Set<Lesson> lessons) { this.lessons = lessons; }
+
+    public Set<Exercise> getExercises() { return exercises; }
+
+    public void setExercises(Set<Exercise> exercises) { this.exercises = exercises; }
 }
