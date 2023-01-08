@@ -26,13 +26,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class AuthenticationService extends UserDetailsServiceImpl {
+public class UserService extends UserDetailsServiceImpl {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder encoder;
     private final JwtUtils jwtUtils;
     private final RoleRepository roleRepository;
 
-    public AuthenticationService(
+    public UserService(
             AuthenticationManager authenticationManager,
             JwtUtils jwtUtils,
             PasswordEncoder encoder,
