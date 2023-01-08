@@ -1,5 +1,6 @@
 package com.godev.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,7 +18,9 @@ public class Path {
     private String name;
     @Size(max = 1000)
     private String description;
+
     @OneToMany(mappedBy = "path")
+    @JsonManagedReference
     private Set<Topic> topics;
 
     public Path() {

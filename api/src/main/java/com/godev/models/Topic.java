@@ -1,5 +1,7 @@
 package com.godev.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,10 +21,13 @@ public class Topic {
     private String description;
     @ManyToOne
     @JoinColumn(name="path", nullable=false)
+    @JsonBackReference
     private Path path;
     @OneToMany(mappedBy="topic")
+    @JsonManagedReference
     private Set<Lesson> lessons;
     @OneToMany(mappedBy="topic")
+    @JsonManagedReference
     private Set<Exercise> exercises;
     public Topic() {    }
 
