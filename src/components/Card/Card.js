@@ -4,7 +4,7 @@ import crown from '../../../src/assets/images/crown.png';
 import './styles.scss';
 
 export default function Card(props) {
-  const { nome, area, logo, qtdAulas, qtdExercicios, status } = props.item;
+  const { id, nome, area, logo, qtdAulas, qtdExercicios, status } = props.item;
   
   return (
     <div className='wrapper'>
@@ -27,7 +27,7 @@ export default function Card(props) {
           <span>{qtdExercicios} exercícios</span>
         </div>
 
-        <a href={`/trilhas/resumo/${nome.toLowerCase()}`} className="trilha__button">
+        <a href={`/trilhas/resumo/${id}`} className="trilha__button">
           Saiba mais
         </a>
 
