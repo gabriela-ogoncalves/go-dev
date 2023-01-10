@@ -3,6 +3,7 @@ package com.godev.controllers;
 import com.godev.models.Lesson;
 import com.godev.payloads.ProgressRequest;
 import com.godev.repository.LessonRepository;
+import com.godev.services.LessonService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,9 +17,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequestMapping("/api/lesson")
 public class LessonController {
     private final LessonRepository lessonRepository;
+    private final LessonService lessonService;
 
-    public LessonController(LessonRepository lessonRepository) {
+    public LessonController(LessonRepository lessonRepository, LessonService lessonService) {
         this.lessonRepository = lessonRepository;
+        this.lessonService = lessonService;
     }
 
     @GetMapping("/{id}")
@@ -37,5 +40,15 @@ public class LessonController {
         );
 
         return ResponseEntity.ok(isCompleted);
+    }
+
+    @PutMapping("/updateStatus")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> updateUserProgress(@Valid @RequestBody ProgressRequest progressRequest) {
+        return lessonService.updateUserProgress(
+                progressRequest.getUsername(),
+                progressRequest.getId(),
+                progressRequest.getStatus()
+        );
     }
 }

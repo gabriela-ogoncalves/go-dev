@@ -3,38 +3,25 @@ import React, { useState, useEffect } from 'react';
 import BoxInfo from '../components/Summary/BoxInfo';
 import TrilhaHeader from '../components/Summary/TrilhaHeader';
 import AulaService from '../services/Aula';
-// import { yourProgress } from '../helpers/lists/yourProgress';
-
-// const getTrilhaInfo = (trilhaName) => {
-//   const resp = yourProgress.filter(trilha => {
-//     if (trilha.nome.toLowerCase() === trilhaName) {
-//       return trilha;
-//     }
-//   });
-
-//   return resp[0];
-// };
-
-// const getAulaInfo = (aulas, aulaNumber) => {
-//   const resp = aulas.filter(aula => {
-//     if (aula.index === parseInt(aulaNumber)) {
-//       return aula;
-//     }
-//   });
-
-//   return resp[0];
-
-// };
+import AuthService from '../services/Auth';
 
 const Aula = () => {
   const param = useParams();
   const [aula, setAula] = useState({});
-  // console.log('param', param);
+  const [topico, setTopico] = useState({});
+  const [completed, setCompleted] = useState(undefined);
+  
+  let invalidStatus = AuthService.getCurrentUser().username ? false : true;
 
   useEffect(() => {
     const getAula = async () => {
-      const response = await AulaService.getAulaById(param);
-      if (!ignore) setAula(response);
+      const aula = await AulaService.getAulaById(param.aula);
+      const topico = await AulaService.getTopicoById(param.aula, param.trilha);
+      if (!ignore) {
+        setAula(aula);
+        setTopico(topico);
+        setCompleted(aula.status);
+      }
     };
 
     let ignore = false;
@@ -44,18 +31,34 @@ const Aula = () => {
     };
   }, [param]);
 
-  // const currentTrilha = getTrilhaInfo(param.trilha);
-  // console.log('currentTrilha', currentTrilha);
+  useEffect(() => {
+    if (!AuthService.getCurrentUser().username || !aula || (completed == null)) return;
+    const setStatus = async () => {
+      await AulaService.sendAulaStatus(aula.id, completed);
+    };
 
-  // const currentAula = getAulaInfo(currentTrilha.aulas, param.aula);
-  // const {index, title} = currentAula;
+    setStatus();
+  }, [completed]);
+
+  const currentTrilha = {
+    'nome': param.trilha,
+    'logo': require(`../assets/logo/trilhas/${param.trilha.toLowerCase()}-logo.png`),
+  };
+
+  // const handleChange = () => {
+  //   invalidStatus = true;
+  //   setCompleted(!completed);
+  //   AulaService.sendAulaStatus(aula.id, !completed);
+  //   invalidStatus = false;
+  // }; 
 
   return (
     <>
       <TrilhaHeader name={currentTrilha.nome} logo={currentTrilha.logo} />
-      <BoxInfo type='aulas' info={currentTrilha} currentItem={currentAula} />
-      <h1>Aula {index} - {aula.title}</h1>
+      <BoxInfo type='aulas' info={topico} currentItem={aula} />
+      <h1>Aula {aula.title}</h1>
       <p>{aula.desc}</p>
+      <input type='checkbox' name='completed' defaultChecked={completed} onChange={(e) => setCompleted(e.target.checked)} disabled={invalidStatus}/> 
     </>
   );
 };

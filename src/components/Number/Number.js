@@ -12,7 +12,7 @@ const Number = ({type, items, currentItem}) => {
             <Circle
               key={i}
               status={stts}
-              href={`/trilhas/${type}/${item.id}`}
+              href={`/trilhas/${item.trilha}/${type}/${item.id}`}
               currentItem={isCurrentItem}
             >
               <Text status={stts}>{item.index}</Text>

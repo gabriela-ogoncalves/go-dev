@@ -3,6 +3,7 @@ package com.godev.payloads;
 public class ProgressRequest {
     private String username;
     private long id;
+    private Boolean status;
 
     public String getUsername() {
         return username;
@@ -19,4 +20,8 @@ public class ProgressRequest {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Boolean getStatus() { return status; }
+
+    public void setStatus(Boolean status) { this.status = status; }
 }

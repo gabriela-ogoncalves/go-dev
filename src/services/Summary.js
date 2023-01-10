@@ -28,7 +28,9 @@ const getTrilhaById = async (id) => {
           'nome': lesson.name,
           'desc': lesson.description,
           'fonte': lesson.source,
-          'status': completedLessonIds.has(lesson.id) ? 'done' : 'progress'
+          'status': completedLessonIds.has(lesson.id) ? 'done' : 'progress',
+          'topico': topic.name,
+          'trilha': path.name
         };
       });
 
