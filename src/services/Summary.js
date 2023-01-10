@@ -7,13 +7,13 @@ const getTrilhaById = async (id) => {
   try {
     let response = await axios.get(API_URL + 'path/' + id);
     let path = response.data;
-    let username = AuthService.getCurrentUser().username;
 
+    let username = AuthService.getCurrentUser().username;
     let completedLessonIds = new Set();
     if (username) {
-      let progressReponse = await axios.post(API_URL + 'user/progress', {
+      let progressReponse = await axios.post(API_URL + 'path/progress', {
         username,
-        pathId: id
+        id
       }, { headers: AuthService.getAuthHeader() });
 
       completedLessonIds = new Set(progressReponse.data);
@@ -23,6 +23,7 @@ const getTrilhaById = async (id) => {
     path.topics.forEach((topic) => {
       let aulas = topic.lessons.map((lesson, index) => {
         return {
+          'id': lesson.id,
           'index': index+1,
           'nome': lesson.name,
           'desc': lesson.description,

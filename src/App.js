@@ -29,7 +29,7 @@ function App() {
           <Route path='/certificados' element={<Certificados />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='trilhas/resumo/:trilha' element={<Summary />} />
-          <Route path='trilhas/:trilha/aulas/:aula' element={<Aula />} />
+          <Route path='trilhas/aulas/:aula' element={<Aula />} />
           <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
         </Routes>
       </div>

@@ -1,6 +1,6 @@
 import { Circle, Text, Wrapper } from './styles';
 
-const Number = ({name, type, items, currentItem}) => {
+const Number = ({type, items, currentItem}) => {
   return(
     <section id='number'>
       <Wrapper>
@@ -12,7 +12,7 @@ const Number = ({name, type, items, currentItem}) => {
             <Circle
               key={i}
               status={stts}
-              href={`/trilhas/${name.toLowerCase()}/${type}/${item.index}`}
+              href={`/trilhas/${type}/${item.id}`}
               currentItem={isCurrentItem}
             >
               <Text status={stts}>{item.index}</Text>

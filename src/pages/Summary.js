@@ -10,7 +10,6 @@ import SummaryService from '../services/Summary';
 
 const Summary = () => {
   const param = useParams().trilha;
-
   const [trilha, setTrilha] = useState({});
 
   useEffect(() => {

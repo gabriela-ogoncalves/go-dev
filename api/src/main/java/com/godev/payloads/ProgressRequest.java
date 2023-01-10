@@ -2,7 +2,7 @@ package com.godev.payloads;
 
 public class ProgressRequest {
     private String username;
-    private long pathId;
+    private long id;
 
     public String getUsername() {
         return username;
@@ -12,11 +12,11 @@ public class ProgressRequest {
         this.username = username;
     }
 
-    public long getPathId() {
-        return pathId;
+    public long getId() {
+        return id;
     }
 
-    public void setPathId(long pathId) {
-        this.pathId = pathId;
+    public void setId(long id) {
+        this.id = id;
     }
 }
