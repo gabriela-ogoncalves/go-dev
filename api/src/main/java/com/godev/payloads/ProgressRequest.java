@@ -4,6 +4,7 @@ public class ProgressRequest {
     private String username;
     private long id;
     private Boolean status;
+    private Character answer;
 
     public String getUsername() {
         return username;
@@ -24,4 +25,8 @@ public class ProgressRequest {
     public Boolean getStatus() { return status; }
 
     public void setStatus(Boolean status) { this.status = status; }
+
+    public Character getAnswer() { return answer; }
+
+    public void setAnswer(Character answer) { this.answer = answer; }
 }
