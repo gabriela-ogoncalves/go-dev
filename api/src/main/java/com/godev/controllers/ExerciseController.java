@@ -32,6 +32,16 @@ public class ExerciseController {
         return ResponseEntity.ok(exercise);
     }
 
+    @PostMapping("/progress")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> userProgressByLesson(@Valid @RequestBody ProgressRequest progressRequest) {
+        Boolean isCompleted = exerciseRepository.isCompleted(
+                progressRequest.getUsername(), progressRequest.getId()
+        );
+
+        return ResponseEntity.ok(isCompleted);
+    }
+
     @PutMapping("/updateExercise")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> updateExerciseProgress(@Valid @RequestBody ProgressRequest progressRequest) {
