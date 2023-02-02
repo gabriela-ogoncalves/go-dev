@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../../services/Auth.js';
+import AuthService from '../../services/auth.js';
 
 export default function CadastroForm() {
   let navigate = useNavigate();

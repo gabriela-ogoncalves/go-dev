@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import BoxInfo from '../components/Summary/BoxInfo';
 import TrilhaHeader from '../components/Summary/TrilhaHeader';
 import AulaService from '../services/Aula';
-import AuthService from '../services/Auth';
+import AuthService from '../services/auth.js';
 
 const Aula = () => {
   const param = useParams();
