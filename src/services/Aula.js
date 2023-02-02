@@ -8,7 +8,7 @@ const getAulaById = async (id) => {
     let response = await axios.get(API_URL + 'lesson/' + id);
     let lesson = response.data;
 
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     let completed = false;
     if (username) {
       let progressReponse = await axios.post(API_URL + 'lesson/progress', {
@@ -38,7 +38,7 @@ const getTopicoById = async (id, trilhaName) => {
     let response = await axios.get(API_URL + 'topic/' + id);
     let topic = response.data;
 
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     let completedLessonIds = new Set();
     if (username) {
       let progressReponse = await axios.post(API_URL + 'path/progress', {
@@ -87,7 +87,7 @@ const getTopicoById = async (id, trilhaName) => {
 
 const sendAulaStatus = async (id, status) => {
   try {
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     if (username)
       await axios.put(API_URL + 'lesson/updateStatus', {username, id, status}, { headers: AuthService.getAuthHeader() });
   } catch (error) {

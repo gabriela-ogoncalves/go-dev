@@ -8,7 +8,7 @@ const getExercicioById = async (id) => {
     let response = await axios.get(API_URL + 'exercise/' + id);
     let exercise = response.data;
 
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     let completed = false;
     if (username) {
       let progressReponse = await axios.post(API_URL + 'exercise/progress', {
@@ -36,7 +36,7 @@ const getExercicioById = async (id) => {
 
 const sendExercicioStatus = async (id, resposta) => {
   try {
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     if (username)
       await axios.put(API_URL + 'exercise/updateExercise', {username, id, resposta}, { headers: AuthService.getAuthHeader() });
   } catch (error) {

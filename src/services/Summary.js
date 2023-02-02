@@ -8,7 +8,7 @@ const getTrilhaById = async (id) => {
     let response = await axios.get(API_URL + 'path/' + id);
     let path = response.data;
 
-    let username = AuthService.getCurrentUser().username;
+    let username = AuthService.getCurrentUser()?.username;
     let completedLessonIds = new Set();
     if (username) {
       let progressReponse = await axios.post(API_URL + 'path/progress', {
