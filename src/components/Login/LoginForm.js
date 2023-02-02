@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../../services/Auth.js';
+import AuthService from '../../services/auth.js';
 import './styles.scss';
 
 export default function LoginForm() {
@@ -30,6 +30,7 @@ export default function LoginForm() {
   return (
     <div className='login'>
       <div className='login__form'>
+        <p className='login__title'>LOGIN</p>
         <form onSubmit={e => {
           clearErrors();
           handleSubmit(onSubmit)(e);
@@ -43,14 +44,16 @@ export default function LoginForm() {
               {...register('username', {
                 required: {
                   value: true,
-                  message: 'username required'
+                  message: 'Usuário é um campo obrigatório'
                 },
               })}
             />
           </div>
-          <div className='login__error'>
-            {errors.username && <span role='alert'>{errors.username.message}</span>}
-          </div>
+          {errors.username && 
+            <div className='login__error'>
+              <span role='alert'>{errors.username.message}</span>
+            </div>
+          }
 
           <div>
             <input
@@ -61,19 +64,24 @@ export default function LoginForm() {
               {...register('password', {
                 required: {
                   value: true,
-                  message: 'password required'
+                  message: 'A senha é obrigatória'
                 },
               })}
             />
           </div>
-          <div className='login__error'>
-            {errors.password && <span role='alert'>{errors.password.message}</span>}
-          </div>
+          {errors.password && 
+            <div className='login__error'>
+              <span role='alert'>{errors.password.message}</span>
+            </div>
+          }
 
           <button className='login__button' type='submit'>Login</button>
-          <div className='login__error'>
-            {errors.login && errors.login.message}
-          </div>
+          
+          {errors.login &&
+            <div className='login__error'>
+              errors.login.message
+            </div>
+          }
         </form>
       </div>
     </div>

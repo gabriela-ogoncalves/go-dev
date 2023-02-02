@@ -3,12 +3,16 @@
     position: relative;
     width: 100%;
     margin: auto;
-    padding: 1.0rem;
+    padding: 5rem;
     justify-content: space-around;
 
+    &__title {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
     &__form {
-        margin: auto;
-        padding: 1.5rem;
+        padding: 1.25rem;
         background-color: #fff;
         border-radius: 20px;
         box-shadow: var(--box-shadow);
@@ -16,10 +20,11 @@
 
     &__input {
         border-radius: 10px;
-        padding: 0.5rem;
+        padding: 0.75rem;
         border-color: var(--go-dev-background);
         border-style: solid;
-        margin-bottom: 5%;
+        margin-bottom: 10%;
+        min-width: 250px;
 
         &:focus {
             outline: none;
@@ -28,20 +33,28 @@
         }
     }
 
+    &__error {
+        margin-bottom: 10%;
+        color: red;
+        font-weight: 500;
+        letter-spacing: 0.03rem;
+    }
+
     &__button {
         position: relative;
         background: var(--go-dev-border);
         color: #ffffff;
-        width: 80%;
-        min-width: 100px;
-        max-width: 250px;
+        width: 60%;
         display: inline-block;
         padding: 10px;
         border-radius: 12px;
         font-size: 13px;
-        letter-spacing: 1px;
+        border: 0;
+        letter-spacing: 0.04rem;
         z-index: 1;
         transition: 300ms ease;
+        cursor: pointer;
+        margin-bottom: 10%;
 
         &:hover {
             &::before {
