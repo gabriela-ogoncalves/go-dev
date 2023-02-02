@@ -31,7 +31,6 @@ Para configurar o `back-end`, caso você esteja usando o sistema operacional **L
 
 ```(shell)
 chmod 777 ./mvnw
-
 ```
 
 ## Rodando o projeto
@@ -80,6 +79,10 @@ E rode o comando abaixo no terminal:
 ```(shell)
 ./mvnw spring-boot:run
 ```
+
+## Visualização do Banco de Dados
+
+Para facilitar a  visualização do banco de dados e das tabelas e registros, sugerimos a instalação da ferramenta [DBeaver](https://dbeaver.io/download/). Para configuração, utilize o nome do banco de dados criado (godev_bd)
 
 ## Testes
 
