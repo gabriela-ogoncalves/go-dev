@@ -85,8 +85,7 @@ export default function LoginForm() {
 
           <div className='login__sign-up'>
             <p>Ainda não possui uma conta?</p>
-            <a href='/cadastro'>Cadastre-se gratuitamente aqui</a>
-            
+            <a href='/cadastro'>Cadastre-se gratuitamente aqui</a>            
           </div>
         </form>
       </div>
