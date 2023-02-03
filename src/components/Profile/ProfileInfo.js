@@ -22,10 +22,13 @@ const ProfileInfo = () => {
     );
   }, []);
 
+  console.log('content: ', content);
+
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
+        <p>username: {content.username}</p>
+        <p>email: {content.email}</p>
       </header>
     </div>
   );

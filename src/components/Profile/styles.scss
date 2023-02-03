@@ -1,0 +1,46 @@
+  .profile-menu {
+    display: flex;
+    justify-content: center;
+
+    &__button {
+      display: flex;
+      height: 100%;
+      width: 100px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+
+    &__container {
+      display: flex;
+      justify-content: center;
+      background-color: #fff;
+      height: 45px;
+      align-items: center;
+      width: 45px;
+      border-radius: 50%;
+      flex-direction: column;
+    }
+
+    &__image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    &__text {
+      font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    &__logout {
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+      height: 100%;
+      font-family: var(--bungee-font);
+      color: var(--go-dev-text);
+      }
+    }
+  }
