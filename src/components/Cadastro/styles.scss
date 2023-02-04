@@ -4,7 +4,8 @@
     width: 100%;
     margin: auto;
     padding: 3rem;
-    justify-content: space-around;
+    justify-content: center;
+    transform: translate(0, 7%);
 
     @media only screen and (max-width: 540px) {
         display: block;

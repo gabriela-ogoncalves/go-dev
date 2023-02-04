@@ -1,4 +1,5 @@
 .navigation {
+    grid-area: header;
     position: relative;
     display: flex;
     align-items: center;
@@ -119,7 +120,7 @@
   
     .navigation-menu.expanded ul {
       display: block;
-      z-index: 1;
+      z-index: 2;
       padding: 1rem;
     }
   }

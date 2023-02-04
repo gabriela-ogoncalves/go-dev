@@ -24,24 +24,26 @@ function App() {
   const [user, setUser] = useState(AuthService.getCurrentUser());
 
   return (
-    <Context.Provider value={[user, setUser]}>
-      <NavBar />
-      <div className='container'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/cadastro' element={<Cadastro />} />
-          <Route path='/trilhas' element={<Trilhas />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/certificados' element={<Certificados />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='trilhas/resumo/:trilha' element={<Summary />} />
-          <Route path='trilhas/:trilha/aulas/:aula' element={<Aula />} />
-          <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Context.Provider>
+    <div className='go-dev'>
+      <Context.Provider value={[user, setUser]}>
+        <NavBar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/cadastro' element={<Cadastro />} />
+            <Route path='/trilhas' element={<Trilhas />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/certificados' element={<Certificados />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='trilhas/resumo/:trilha' element={<Summary />} />
+            <Route path='trilhas/:trilha/aulas/:aula' element={<Aula />} />
+            <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Context.Provider>
+    </div>
   );
 }
 
