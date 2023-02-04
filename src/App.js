@@ -1,4 +1,9 @@
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import AuthService from './services/auth';
+import Context from './Context';
+
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -16,8 +21,10 @@ import Footer from './components/Footer/Footer';
 import './App.scss';
 
 function App() {
+  const [user, setUser] = useState(AuthService.getCurrentUser());
+
   return (
-    <>
+    <Context.Provider value={[user, setUser]}>
       <NavBar />
       <div className='container'>
         <Routes>
@@ -34,7 +41,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
-    </>
+    </Context.Provider>
   );
 }
 

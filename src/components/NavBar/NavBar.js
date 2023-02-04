@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import AuthService from '../../services/auth.js';
 
@@ -8,12 +8,11 @@ import MenuIcon from './MenuIcon';
 import ProfileMenu from '../Profile/ProfileMenu.js';
 
 import './styles.scss';
+import Context from '../../Context.js';
 
 const NavBar = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const user = AuthService.getCurrentUser();
-
-  console.log('user: ', user);
+  const [isLogged, setIsLogged] = useContext(Context);
 
   const toggleNav = () => {
     setIsNavExpanded(!isNavExpanded);
@@ -40,9 +39,9 @@ const NavBar = () => {
           }
         >
           <ul>
-          { user && 
+          { isLogged && 
             <Link to='/profile'>
-              <ProfileMenu user={user} AuthService={AuthService} /> 
+              <ProfileMenu /> 
             </Link>
           }
             <CustomLink onClick={toggleNav} role="link" href="/trilhas">
@@ -51,7 +50,7 @@ const NavBar = () => {
             <CustomLink onClick={toggleNav} role="link" href="/certificados">
               Certificados
             </CustomLink>
-            {!user && (
+            {!isLogged && (
               <>
                 <CustomLink onClick={toggleNav} role="link" href="/cadastro">
                   Cadastro
@@ -61,13 +60,16 @@ const NavBar = () => {
                 </CustomLink>
               </>
             )}
-            { user &&
+            { isLogged &&
               <li className='navigation-menu__logout'>
                 <button
                   className='profile-menu__button__logout'
                   onClick={() => {
                     if (confirm('Tem certeza que deseja sair?')) {
                       AuthService.logout();
+                      setIsLogged(false);
+                      window.location.reload();
+                      <Link to='/'></Link>;
                     }
                   }}
                 >

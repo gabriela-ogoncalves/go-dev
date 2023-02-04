@@ -1,12 +1,12 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
 import profile_img from '../../assets/images/profile.jpg';
+import Context from '../../Context';
 
 import './styles.scss';
 
-const ProfileMenu = ({
-  user,
-}) => {
+const ProfileMenu = () => {
+  const [user] = useContext(Context);
+
   return (
     <div id='profile-menu' className='profile-menu'>
       <div className='profile-menu__button'>

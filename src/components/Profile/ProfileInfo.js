@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import ProfileService from '../../services/Profile.js';
+import React, { useContext } from 'react';
+import Context from '../../Context.js';
+import LoginForm from '../Login/LoginForm.js';
 
 const ProfileInfo = () => {
-  const [content, setContent] = useState('');
+  const [user] = useContext(Context);
 
-  useEffect(() => {
-    ProfileService.getUserProfile().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
+  if (user) {
+    return (
+      <div className="container">
+        <header className="jumbotron">
+          <p>username: {user.username}</p>
+          <p>email: {user.email}</p>
+        </header>
+      </div>  
     );
-  }, []);
+  } else {
+    window.location = '/login';
+    return <LoginForm />;
+  }
 
-  console.log('content: ', content);
-
-  return (
-    <div className="container">
-      <header className="jumbotron">
-        <p>username: {content.username}</p>
-        <p>email: {content.email}</p>
-      </header>
-    </div>
-  );
 };
 
 export default ProfileInfo;
