@@ -100,6 +100,7 @@
             background-color: white;
             border-top: 1px solid black;
             display: none;
+            margin-top: 0.875rem;
         }
 
         li {
@@ -125,3 +126,15 @@
     }
   }
   
+  .swal-text {
+    line-height: 1.5rem;
+    text-align: center;
+  }
+
+  .swal-button--confirm {
+    background-color: var(--go-dev-border);
+  }
+
+  .user-status-menu {
+    font-family: monospace;
+  }

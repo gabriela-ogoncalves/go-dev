@@ -2,6 +2,10 @@
     display: flex;
     justify-content: center;
 
+    @media screen and (max-width: 700px) {
+      margin-bottom: 1.25rem;
+    }
+
     &__button {
       display: flex;
       height: 100%;
@@ -20,6 +24,7 @@
       width: 45px;
       border-radius: 50%;
       flex-direction: column;
+      border: 24px solid var(--go-dev-border);
     }
 
     &__image {
@@ -32,6 +37,7 @@
       font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
       font-size: 12px;
       text-decoration: none;
+      margin: 4px 0 0 0;
     }
 
     &__logout {

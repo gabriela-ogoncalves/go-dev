@@ -1,23 +1,26 @@
 import { useState, useContext } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import AuthService from '../../services/auth.js';
 
 import logo from '../../assets/logo/go-dev-logo.png';
 import MenuIcon from './MenuIcon';
-
-import ProfileMenu from '../Profile/ProfileMenu.js';
+import Menu from './Menu';
 
 import './styles.scss';
 import Context from '../../Context.js';
+import Status from './Status';
 
 const NavBar = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const [isLogged, setIsLogged] = useContext(Context);
+  const [isLogged] = useContext(Context);
+  const isMobile = document.body.offsetWidth <= 700;
+
+  const enableMenu = isLogged || (isMobile && !isLogged);
+
 
   const toggleNav = () => {
     setIsNavExpanded(!isNavExpanded);
   };
-
+  
   return (
     <article data-testid="nav-bar">
       <nav className="navigation">
@@ -39,19 +42,11 @@ const NavBar = () => {
           }
         >
           <ul>
-          { isLogged && 
-            <Link to='/profile'>
-              <ProfileMenu /> 
-            </Link>
-          }
-            <CustomLink onClick={toggleNav} role="link" href="/trilhas">
-              Trilhas
-            </CustomLink>
-            <CustomLink onClick={toggleNav} role="link" href="/certificados">
-              Certificados
-            </CustomLink>
             {!isLogged && (
               <>
+                <CustomLink onClick={toggleNav} role="link" href="/trilhas">
+                  Trilhas
+                </CustomLink>
                 <CustomLink onClick={toggleNav} role="link" href="/cadastro">
                   Cadastro
                 </CustomLink>
@@ -60,25 +55,11 @@ const NavBar = () => {
                 </CustomLink>
               </>
             )}
-            { isLogged &&
-              <li className='navigation-menu__logout'>
-                <button
-                  className='profile-menu__button__logout'
-                  onClick={() => {
-                    if (confirm('Tem certeza que deseja sair?')) {
-                      AuthService.logout();
-                      setIsLogged(false);
-                      window.location.reload();
-                      <Link to='/'></Link>;
-                    }
-                  }}
-                >
-                  Sair
-                </button>
-              </li>
-            }
           </ul>
         </div>
+        { isLogged && !isMobile && <Status />}
+        { enableMenu &&  <Menu />}
+
       </nav>
     </article>
   );
