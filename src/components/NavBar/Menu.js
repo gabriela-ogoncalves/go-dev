@@ -93,7 +93,9 @@ export default function AccountMenu() {
               '& .MuiList-root': {
                 fontFamily: 'var(--open-sans-font)'
               },
-
+              '& .MuiButtonBase-root': {
+                minHeight: '3.5rem',
+              },
               '&:before': {
                 content: '""',
                 display: 'block',
@@ -180,7 +182,10 @@ export default function AccountMenu() {
                 mr: 1,
               },
               '& .MuiList-root': {
-                width: 160
+                width: 200
+              },
+              '& .MuiButtonBase-root': {
+                minHeight: '3.5rem',
               },
               '&:before': {
                 content: '""',
