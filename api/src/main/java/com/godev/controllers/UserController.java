@@ -1,6 +1,5 @@
 package com.godev.controllers;
 
-import com.godev.models.Lesson;
 import com.godev.models.User;
 import com.godev.payloads.LoginRequest;
 import com.godev.payloads.SignupRequest;
@@ -54,9 +53,6 @@ public class UserController {
     @GetMapping("/progress/{username}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> userProgress(@PathVariable String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
-        return ResponseEntity.ok(user.getLessons().stream().map((Lesson::getId)));
+        return userService.userProgress(username);
     }
 }

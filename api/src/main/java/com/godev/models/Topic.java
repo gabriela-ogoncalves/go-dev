@@ -26,6 +26,7 @@ public class Topic {
     @OneToMany(mappedBy="topic")
     @JsonManagedReference
     private Set<Lesson> lessons;
+
     @OneToMany(mappedBy="topic")
     @JsonManagedReference
     private Set<Exercise> exercises;
@@ -72,11 +73,13 @@ public class Topic {
         this.path = path;
     }
 
-    public Set<Lesson> getLessons() {
-        return lessons;
-    }
+    public Set<Lesson> getLessons() { return lessons; }
 
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
     }
+
+    public Set<Exercise> getExercises() { return exercises; }
+
+    public void setExercises(Set<Exercise> exercises) { this.exercises = exercises; }
 }
