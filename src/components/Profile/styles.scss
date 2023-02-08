@@ -50,3 +50,183 @@
       }
     }
   }
+
+  .profile-info {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: 'profile' 'other' 'details' 'trilhas';
+    margin: 3rem;
+    grid-column-gap: 3rem;
+    grid-row-gap: 3rem;
+ 
+
+    &__header {
+      grid-area: profile;
+      grid-column-start: 1;
+      grid-column-end: 1;
+      grid-row-start: 1;
+      grid-row-end: 1;
+  
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--box-shadow);
+      min-width: 300px;
+
+      &__username {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      &__job {
+        font-size: 18px;
+        margin: 0;
+        color: #4f4f4f;
+      }
+    }
+
+    &__details {
+      grid-area: details;
+      grid-column-start: 2;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 1;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--box-shadow);
+      min-width: 300px;
+      align-self: center;
+
+      &__title {
+        text-align: start;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 1rem 0px;
+      }
+
+      &__parts {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 0.5rem;
+        text-align: start;
+        margin-top: 1rem;
+
+
+        &__left {
+          grid-column-start: 1;
+          color: #4f4f4f;
+          font-weight: 500;
+        }
+
+        &__right {
+          grid-column-start: 2;
+          color: #757575;
+        }
+      }
+    }
+
+    &__trilhas {
+      grid-area: trilhas;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 2;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--box-shadow);
+      min-width: 300px;
+
+      &__title {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 1rem 0px;
+      }
+
+      &__list {
+        display: flex;
+        text-align: start;
+        margin-top: 1rem;
+      }
+    }
+
+    @media only screen and (max-width: 800px) {
+      display: flex;
+      flex-direction: column;
+      margin: 2rem;
+      gap: 3rem;
+
+      &__header {
+        min-width: 100%;
+        background-color: var(--go-dev-border);
+        margin: -3rem -3rem 0;
+        border-radius: 0;
+        padding: 0;
+        gap: 0;
+        height: 80px;
+        padding-top: 40px;
+        margin-bottom: 2rem;
+
+        div {
+          background-color: var(--go-dev-background);
+          color: var(--color-dark-purple);
+          width: 80px;
+          height: 80px;
+        }
+
+        &__username {
+          font-size: 18px;
+          margin: 0.5rem;
+        }
+
+        &__job {
+          font-size: 15px;
+        }
+      }
+      
+      &__details {
+        min-width: 100%;
+        align-self: auto;
+        margin-top: 3rem;
+
+        &__title {
+          font-size: 18px;
+          text-align: center;
+        }
+  
+        &__parts {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+
+          &__left {
+            margin-top: 1rem;
+            margin-bottom: 0;
+          }
+
+          &__right {
+            margin: 0;
+            word-wrap: break-word;
+          }
+        }
+      }
+
+      &__trilhas {
+        min-width: 100%;
+
+        &__title {
+          font-size: 18px;
+        }
+      }
+    }
+  }
