@@ -1,9 +1,11 @@
 package com.godev.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.hypersistence.utils.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "exercise")
@@ -16,9 +18,10 @@ public class Exercise {
     private String name;
     @Size(max = 1000)
     private String description;
-    @Size(max = 1000)
-    private String source;
-    private Character answer;
+    @Type(StringArrayType.class)
+    private String[] answers;
+    @Column(name = "correct_answer")
+    private Character correctAnswer;
     @ManyToOne
     @JoinColumn(name = "topic", nullable = false)
     @JsonBackReference
@@ -27,12 +30,12 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(long id, String name, String description, String source, Character answer, Topic topic) {
+    public Exercise(long id, String name, String description, String[] answers, Character correctAnswer, Topic topic) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.source = source;
-        this.answer = answer;
+        this.answers = answers;
+        this.correctAnswer = correctAnswer;
         this.topic = topic;
     }
 
@@ -48,15 +51,15 @@ public class Exercise {
 
     public void setDescription(String description) { this.description = description; }
 
-    public String getSource() { return source; }
+    public String[] getAnswers() { return answers; }
 
-    public void setSource(String source) { this.source = source; }
+    public void setAnswers(String[] answers) { this.answers = answers; }
 
     public Topic getTopic() { return topic; }
 
     public void setTopic(Topic topic) { this.topic = topic; }
 
-    public Character getAnswer() { return answer; }
+    public Character getCorrectAnswer() { return correctAnswer; }
 
-    public void setAnswer(Character answer) { this.answer = answer; }
+    public void setCorrectAnswer(Character correctAnswer) { this.correctAnswer = correctAnswer; }
 }

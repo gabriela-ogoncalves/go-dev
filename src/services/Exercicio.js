@@ -24,8 +24,8 @@ const getExercicioById = async (id) => {
       'title': exercise.name,
       'desc': exercise.description,
       'status': completed,
-      'fonte': exercise.source,
-      'resposta': exercise.answer
+      'respostas': exercise.answers,
+      'respostaCerta': exercise.correctAnswer
     };
 
     return exercicio;
