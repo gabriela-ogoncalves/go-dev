@@ -69,8 +69,26 @@ const getTrilhaById = async (id) => {
   }
 };
 
+const getSummaryByUser = async () => {
+  try {
+    const username = AuthService.getCurrentUser()?.username;
+
+    if (username) {
+      const response = await axios.get(
+        API_URL + 'user/progress/' + username, 
+        { headers: AuthService.getAuthHeader() }
+      );
+      
+      return response.data;
+    }
+  } catch (err) {
+    console.error('Error to get summary by user: ', err.message);
+  }
+};
+
 const SummaryService = {
-  getTrilhaById
+  getTrilhaById,
+  getSummaryByUser
 };
 
 export default SummaryService;
