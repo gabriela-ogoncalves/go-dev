@@ -3,9 +3,21 @@ import crown from '../../../src/assets/images/crown.png';
 
 import './styles.scss';
 
+const calculeTotal = (topics, type) => {
+  let total = 0;
+
+  topics.map(topic => {
+    total = total + topic[type].length;
+  });
+
+  return total;
+};
+
 export default function Card(props) {
-  const { id, nome, area, logo, qtdAulas, qtdExercicios, status } = props.item;
-  
+  const { id, nome, area, logo, qtdAulas, qtdExercicios,
+    name, description, topics, status
+  } = props.item;
+
   return (
     <div className='wrapper'>
       <div className='trilha'>
@@ -15,16 +27,16 @@ export default function Card(props) {
 
       <div className="trilha__text"> 
         <div className="trilha__text__name">
-          {nome}
+          {nome || name}
         </div>
         
         <div className="trilha__text__area">
-          {area}
+          {area || description}
         </div>
        
         <div className="trilha__text__info">
-          <span>{qtdAulas} aulas</span>
-          <span>{qtdExercicios} exercícios</span>
+          <span>{qtdAulas || calculeTotal(topics, 'lessons')} aulas</span>
+          <span>{qtdExercicios || calculeTotal(topics, 'exercises')} exercícios</span>
         </div>
 
         <a href={`/trilhas/resumo/${id}`} className="trilha__button">

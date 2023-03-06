@@ -24,17 +24,22 @@ const setStyle = (isSmall) => {
   }
 };
 
-const TrilhasProgress = () => {
+const TrilhasProgress = ({
+  performance,
+  from
+}) => {
+  const profileInfo = from === 'profile-info';
   const type = yourProgress.length <= 4 ? 'small' : 'big';
   const isSmall = type === 'small';
 
   return(
     <Grid
-      title='Seu progresso'
-      titleStyle={isMobile && 'title-grid-mobile'}
-      items={yourProgress}
+      title={!profileInfo && 'Seu progresso'}
+      titleStyle={!profileInfo && isMobile && 'title-grid-mobile'}
+      items={profileInfo ? performance : yourProgress}
       row={getRow(isSmall)}
       style={setStyle(isSmall)}
+      from={from}
     />
   );
 };
