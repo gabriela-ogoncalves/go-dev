@@ -1,4 +1,5 @@
 export const isMobile = window.innerWidth <= 700;
+export const isDesktopBigScreen = window.innerWidth > 1024;
 
 export const getStatus = (status) => {
   if (status) {

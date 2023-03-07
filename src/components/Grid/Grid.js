@@ -8,13 +8,17 @@ import 'swiper/css/pagination';
 import './styles.scss';
 
 import { Grid, Pagination } from 'swiper';
-import { isMobile } from '../../helpers/utils';
+import { isMobile, isDesktopBigScreen } from '../../helpers/utils';
 
 import Card from '../Card/Card';
 
 const calculeSlidePerView = (from) => {
   if (from === 'profile-info') {
-    return isMobile ? 1 : 2;
+    if (isMobile) {
+      return 1;
+    } else {
+      return isDesktopBigScreen ? 3 : 2;
+    }
   }
   
   return isMobile ? 2 : 4;

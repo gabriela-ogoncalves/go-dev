@@ -86,9 +86,26 @@ const getSummaryByUser = async () => {
   }
 };
 
+const formatTrilhaData = (trilhas) => {
+  return trilhas.map((value) => {
+    const formattedData = {
+      'id': value.id,
+      'nome': value.name,
+      'area': value.description,
+      'status': value.status,
+      'qtdAulas': value.topics.reduce((acc, topic) => acc + topic.lessons.length, 0),
+      'qtdExercicios': value.topics.reduce((acc, topic) => acc + topic.exercises.length, 0),
+      'logo': require(`../assets/logo/trilhas/${value.name.toLowerCase()}-logo.png`),
+    };
+
+    return formattedData;
+  });
+};
+
 const SummaryService = {
   getTrilhaById,
-  getSummaryByUser
+  getSummaryByUser,
+  formatTrilhaData
 };
 
 export default SummaryService;
