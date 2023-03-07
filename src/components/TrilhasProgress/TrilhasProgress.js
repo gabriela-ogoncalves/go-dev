@@ -32,7 +32,7 @@ const TrilhasProgress = ({
   const profileInfo = from === 'profile-info';
   const type = yourProgress.length <= 4 ? 'small' : 'big';
   const isSmall = type === 'small';
-  const data = SummaryService.formatTrilhaData(performance);
+  const data = performance && SummaryService.formatTrilhaData(performance);
 
   return(
     <Grid
