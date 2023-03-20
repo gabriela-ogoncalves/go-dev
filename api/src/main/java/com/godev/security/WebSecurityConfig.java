@@ -80,11 +80,11 @@ public class WebSecurityConfig {
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
+            .requestMatchers("/api/topic/**").permitAll()
+            .requestMatchers("/api/path/**").permitAll()
             .requestMatchers("/api/user/**").permitAll()
             .requestMatchers("/api/exercise/**").permitAll()
             .requestMatchers("/api/lesson/**").permitAll()
-            .requestMatchers("/api/topic/**").permitAll()
-            .requestMatchers("/api/path/**").permitAll()
             .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

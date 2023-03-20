@@ -52,4 +52,6 @@ public class Lesson {
     public Topic getTopic() { return topic; }
 
     public void setTopic(Topic topic) { this.topic = topic; }
+
+    public Long getTopicId() { return topic.getId(); }
 }

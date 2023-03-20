@@ -1,6 +1,7 @@
 package com.godev.controllers;
 
 import com.godev.models.Lesson;
+import com.godev.payloads.LessonResponse;
 import com.godev.payloads.ProgressRequest;
 import com.godev.repository.LessonRepository;
 import com.godev.services.LessonService;
@@ -29,7 +30,14 @@ public class LessonController {
         Lesson lesson = lessonRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Lesson not found: " + id));
 
-        return ResponseEntity.ok(lesson);
+        var response = new LessonResponse(
+                lesson.getId(),
+                lesson.getName(),
+                lesson.getDescription(),
+                lesson.getSource(),
+                lesson.getTopic().getId()
+        );
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/progress")
