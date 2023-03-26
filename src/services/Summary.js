@@ -102,10 +102,51 @@ const formatTrilhaData = (trilhas) => {
   });
 };
 
+const getTrilhaByUser = async (id) => {
+  try {
+    const username = AuthService.getCurrentUser()?.username;
+    let data;
+
+    if (username) {
+      const response = await axios.get(
+        API_URL + 'user/progress/' + username, 
+        { headers: AuthService.getAuthHeader() }
+      );
+
+      const userPerfomance = response?.data;
+      const {completedPaths, uncompletedPaths} = userPerfomance;
+
+      let performance = [];
+  
+      if (completedPaths.length > 0) {
+        completedPaths.map(path => {
+          Object.assign(path, { status: 'done' });
+          performance.push(path);
+        });
+      }
+  
+      if (uncompletedPaths.length > 0) {
+        uncompletedPaths.map(path => {
+          Object.assign(path, { status: 'progress' });
+          performance.push(path);
+        });
+      }
+  
+      const trilha = performance.filter(item => item.id === id);
+      data = formatTrilhaData(trilha)[0];
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Error to get trilha by user: ', err.message);
+  }
+};
+
 const SummaryService = {
   getTrilhaById,
   getSummaryByUser,
-  formatTrilhaData
+  formatTrilhaData,
+  getTrilhaByUser
 };
 
 export default SummaryService;

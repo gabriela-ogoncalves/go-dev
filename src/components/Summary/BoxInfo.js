@@ -9,14 +9,14 @@ const BoxInfo = (props) => {
 
   return(
     <section id='box-info'>
-      <fieldset>
-        <legend>{title}</legend>
+      <div className='box-info__container'>
+        <span className='box-info__container__title'>{title}</span>
         <Number
           type={type}
           items={type === 'aulas' ? aulas : exercicios}
           currentItem={props.currentItem}
         />
-      </fieldset>
+      </div>
     </section>
   );
 };

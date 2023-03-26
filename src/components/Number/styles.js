@@ -3,20 +3,19 @@ import styled from 'styled-components';
 const Wrapper = styled.article`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(10,1fr);
+  grid-template-columns: repeat(5,1fr);
   gap: 0.8rem;
   grid-auto-rows: minmax(50px,auto);
   place-items: center;
-  margin: 1rem;
+  margin: 0.75rem;
 
   @media screen and (max-width: 600px) {
-    grid-template-columns: repeat(5,1fr);
     margin: 0.5rem;
     gap: 0.5rem;
   }
 
-  @media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(15,1fr);
+  @media screen and (min-width: 1300px) {
+    grid-template-columns: repeat(7,1fr);
   }
 `;
 
@@ -30,8 +29,8 @@ const Circle = styled.a`
       : 'var(--progress-color)'
   };
   border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.85rem;
+  height: 1.85rem;
   box-shadow: 2px 1px 5px 2px rgb(0 0 0 / 60%);
   text-decoration: none;
   border: ${
@@ -49,7 +48,7 @@ const Text = styled.span`
       : 'var(--go-dev-text)'
   };
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 export {

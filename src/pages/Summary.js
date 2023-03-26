@@ -4,8 +4,6 @@ import Separator from '../components/Separator/Separator';
 import SummaryTrilha from '../components/Summary/SummaryTrilha';
 import TrilhasSuggest from '../components/TrilhasSuggest/TrilhasSuggest';
 
-// import { yourProgress } from '../helpers/lists/yourProgress';
-// import { trilhas } from '../helpers/lists/trilhas';
 import SummaryService from '../services/Summary';
 
 const Summary = () => {
