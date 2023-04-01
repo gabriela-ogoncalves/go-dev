@@ -76,7 +76,6 @@ const Aula = () => {
   //   invalidStatus = false;
   // };
 
-  console.log('topicos em Aula: ', topics);
   console.log('topico: ', topico);
   console.log('invalidStatus: ', invalidStatus);
 
