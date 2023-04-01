@@ -24,7 +24,8 @@ const getAulaById = async (id) => {
       'title': lesson.name,
       'desc': lesson.description,
       'status': completed,
-      'fonte': lesson.source
+      'fonte': lesson.source,
+      'topic_id': lesson.topicId
     };
 
     return aula;

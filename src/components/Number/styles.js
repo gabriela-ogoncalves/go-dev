@@ -11,7 +11,7 @@ const Wrapper = styled.article`
 
   @media screen and (max-width: 600px) {
     margin: 0.5rem;
-    gap: 0.5rem;
+    gap: ${ props => props.isLessonScreen ? '1rem' : '0.5rem' }
   }
 
   @media screen and (min-width: 1300px) {
@@ -26,7 +26,9 @@ const Circle = styled.a`
   background: ${
     props => props.status === 'done' 
       ? 'var(--success-color)' 
-      : 'var(--progress-color)'
+      : props.currentItem
+        ? 'var(--go-dev-text)'
+        : 'var(--progress-color)'
   };
   border-radius: 50%;
   width: 1.85rem;
@@ -43,11 +45,11 @@ const Circle = styled.a`
 const Text = styled.span`
   padding-top: 2px;
   color: ${
-    props => props.status === 'done' 
-      ? '#fff' 
+    props => props.currentItem || props.status === 'done' 
+      ?  '#fff'
       : 'var(--go-dev-text)'
   };
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
 `;
 
