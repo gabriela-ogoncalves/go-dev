@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import BoxInfo from './BoxInfo';
 import TrilhaInfo from './TrilhaInfo';
@@ -6,6 +7,7 @@ import TrilhaInfo from './TrilhaInfo';
 import SummaryService from '../../services/Summary.js';
 
 const SummaryTrilha = (props) => {
+  const param = useParams();
   const {info} = props;
   const [userPerfomance, setUserPerformance] = useState();
 
@@ -13,7 +15,7 @@ const SummaryTrilha = (props) => {
 
   useEffect(() => {
     if (!userPerfomance) {
-      SummaryService.getTrilhaByUser(2).then((res) =>
+      SummaryService.getTrilhaByUser(parseInt(param.trilha)).then((res) =>
         setUserPerformance(res)
       );
     }
