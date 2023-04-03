@@ -18,12 +18,12 @@
     }
 
     img {
-        width: 131px;
+        width: 125px;
         height: 57px;
 
         @media only screen and (max-width: 700px) {
             width: 100px;
-            height: 40px;           
+            height: 48px;           
         }
     }
 
@@ -38,7 +38,6 @@
         font-size: 10px;
         bottom: 24px;
         width: 50%;
-        margin-left: 1.5rem;
       }
     }
   }
