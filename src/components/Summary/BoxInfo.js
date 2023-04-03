@@ -21,6 +21,7 @@ const BoxInfo = (props) => {
           items={type === 'aulas' ? lessons : exercises}
           currentItem={props.currentItem}
           isLessonScreen={isLessonScreen}
+          user={props.user}
         />
       </div>
     </section>

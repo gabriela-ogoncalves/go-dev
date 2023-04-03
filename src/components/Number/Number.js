@@ -1,7 +1,7 @@
 import { Circle, Text, Wrapper } from './styles';
 import { useParams } from 'react-router-dom';
 
-const Number = ({type, items, currentItem, isLessonScreen}) => {
+const Number = ({type, items, currentItem, isLessonScreen, user}) => {
   const param = useParams();
 
   return(
@@ -10,12 +10,13 @@ const Number = ({type, items, currentItem, isLessonScreen}) => {
         {items && items.map((item, i) => {
           const stts = item.status || 'progress';
           const isCurrentItem = isLessonScreen && currentItem?.id === item.id;
+          const redirect = user ? `/trilhas/${item.trilha}/${param.id || param.trilha}/${type}/${item.id}` : '/login';
 
           return(
             <Circle
               key={i}
               status={stts}
-              href={`/trilhas/${item.trilha}/${param.id || param.trilha}/${type}/${item.id}`}
+              href={redirect}
               currentItem={isCurrentItem}
             >
               <Text

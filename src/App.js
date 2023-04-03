@@ -36,7 +36,7 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/certificados' element={<Certificados />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='trilhas/resumo/:trilha' element={<Summary />} />
+            <Route path='trilhas/resumo/:trilha' element={<Summary user={user} />} />
             <Route path='trilhas/:trilha/:id/aulas/:aula' element={<Aula />} />
             <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
           </Routes>

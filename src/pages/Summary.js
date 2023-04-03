@@ -6,7 +6,7 @@ import TrilhasSuggest from '../components/TrilhasSuggest/TrilhasSuggest';
 
 import SummaryService from '../services/Summary';
 
-const Summary = () => {
+const Summary = ({ user }) => {
   const param = useParams().trilha;
   const [trilha, setTrilha] = useState({});
 
@@ -25,7 +25,7 @@ const Summary = () => {
 
   return(
     <section data-testid='summary'>
-      <SummaryTrilha info={trilha} />
+      <SummaryTrilha info={trilha} user={user} />
       <Separator />
       <TrilhasSuggest />
     </section>

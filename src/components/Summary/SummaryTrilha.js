@@ -45,8 +45,8 @@ const SummaryTrilha = (props) => {
                   </div>
                 </div>
                 <div className='summary-trilha__container__info'>
-                  <BoxInfo type='aulas' info={topico} />
-                  <BoxInfo type='exercicios' info={topico} />
+                  <BoxInfo type='aulas' info={topico} user={props.user} />
+                  <BoxInfo type='exercicios' info={topico} user={props.user} />
                 </div>
               </div>
             </fieldset>
