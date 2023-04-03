@@ -1,29 +1,32 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
 import BoxInfo from '../Summary/BoxInfo';
 
+import Context from '../../Context';
+
 import AulaService from '../../services/Aula';
-import AuthService from '../../services/auth.js';
-// import SummaryService from '../../services/Summary';
+import SummaryService from '../../services/Summary';
+
 import { isMobile } from '../../helpers/utils';
 
 import './styles.scss';
 
 export default function Lesson({ topics, currentItem, trilhaId }) {
-  const [completed, setCompleted] = useState(false);
+  const param = useParams();
+  const [ user ] = useContext(Context);
+  const [aula, setAula] = useState({});
+  /* eslint-disable-next-line */
+  const [topico, setTopico] = useState({});
+  /* eslint-disable-next-line */
+  const [summaryTrilha, setSummaryTrilha] = useState({});
+  const [completed, setCompleted] = useState(undefined);
   const [lessons, setLessons] = useState([]);
 
-  const invalidStatus = AuthService.getCurrentUser().username ? false : true;
-
-  const handleChange = (e, item) => {
-    console.log('chegou no handleChange', { e, item });
-    setCompleted(!completed);
-    AulaService.sendAulaStatus(item.id, completed);
-  };
-
-  // console.log('topics', topics);
-  // console.log('currentItem', currentItem);
+  const invalidStatus = user ? false : true;
 
   useEffect(() => {
     if (topics) {
@@ -38,6 +41,54 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
       setLessons(items);
     }
   }, [topics]);
+
+  useEffect(() => {
+    const getAula = async () => {
+      const aula = await AulaService.getAulaById(param.aula);
+      const topico = aula && await AulaService.getTopicoById(aula.topic_id, param.trilha);
+
+      if (!ignore) {
+        setAula(aula);
+        setTopico(topico);
+        setCompleted(aula.status);
+      }
+    };
+
+    let ignore = false;
+    getAula();
+    return () => {
+      ignore = true;
+    };
+  }, [param]);
+
+  useEffect(() => {
+    if (!user || !aula || completed == null)
+      return;
+    
+    const setStatus = async () => {
+      await AulaService.sendAulaStatus(aula.id, completed);
+    };
+
+    setStatus();
+  }, [completed]);
+
+  useEffect(() => {
+    const getCurrentTrilha = async () => {
+      const trilha = await SummaryService.getTrilhaById(parseInt(param.id));
+
+      if (!ignore) {
+        setSummaryTrilha(trilha);
+      }
+    };
+
+    let ignore = false;
+    getCurrentTrilha();
+    return () => {
+      ignore = true;
+    };
+  }, [param.id]);
+
+  const isLastItem = lessons.length > 0 && lessons.slice(-1)[0].id === currentItem.id;
 
   return (
     <>
@@ -61,7 +112,9 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
                       const isActive = aula.id === currentItem.id;
                       const classBase = isActive
                         ? 'lesson__topics__lessons__active'
-                        : 'lesson__topics__lessons';
+                        : aula.status === 'done'
+                          ? 'lesson__topics__lessons__done'
+                          : 'lesson__topics__lessons';
 
                       return (
                         <a
@@ -86,17 +139,22 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
           <div className="lesson__item__title">{currentItem.title}</div>
           <div className="lesson__item__description">{currentItem.desc}</div>
           <YoutubeEmbed url="https://www.youtube.com/embed/JHO_oIg0OcA" />
-          <div className="lesson__status">
-            <input
-              type="checkbox"
-              name="completed"
-              defaultChecked={completed}
-              onChange={(e) => handleChange(e, currentItem)}
-              disabled={invalidStatus}
-              // onChange={(e) => setCompleted(e.target.checked)}
-            />
-            <span className="lesson__status__text">concluir aula</span>
-          </div>
+          {
+            user && (
+              <div className="lesson__status">
+                <input
+                  type="checkbox"
+                  name="completed"
+                  defaultChecked={completed}
+                  onChange={(e) => setCompleted(e.target.checked)}
+                  disabled={invalidStatus}
+                />
+                <span className="lesson__status__text">
+                  {completed ? 'aula concluída!' : 'concluir aula'}
+                </span>
+              </div>
+            )
+          }
         </div>
       </div>
 
@@ -107,9 +165,21 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
             currentItem={currentItem}
             items={lessons}
             screen="lesson"
+            user={user}
           />
         </div>
       )}
+
+      {
+        isLastItem && completed && (
+          <a className="go-to-exercices" href={`/trilhas/resumo/${trilhaId}`}>
+            <span className="go-to-exercices__text">
+              ir para os exercícios
+            </span>
+            <ArrowForwardIcon />
+          </a>
+        )
+      }
     </>
   );
 }
