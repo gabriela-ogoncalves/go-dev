@@ -38,7 +38,7 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='trilhas/resumo/:trilha' element={<Summary user={user} />} />
             <Route path='trilhas/:trilha/:id/aulas/:aula' element={<Aula />} />
-            <Route path='trilhas/:trilha/exercicios/:exercicio' element={<Exercicio />} />
+            <Route path='trilhas/:trilha/:id/exercicios/:exercicio' element={<Exercicio user={user} />} />
           </Routes>
         </div>
         <Footer />

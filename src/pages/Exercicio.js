@@ -1,41 +1,76 @@
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BoxInfo from '../components/Summary/BoxInfo';
+
 import TrilhaHeader from '../components/Summary/TrilhaHeader';
-import { yourProgress } from '../helpers/lists/yourProgress';
+import Exercise from '../components/Exercise/Exercise';
 
-const getTrilhaInfo = (trilhaName) => {
-  const resp = yourProgress.filter(trilha => {
-    if (trilha.nome.toLowerCase() === trilhaName) {
-      return trilha;
-    }
-  });
+import ExercicioService from '../services/Exercicio';
+import SummaryService from '../services/Summary';
 
-  return resp[0];
-};
-
-const getExercicioInfo = (exercicios, exercicioNumber) => {
-  const resp = exercicios.filter(item => {
-    if (item.index === parseInt(exercicioNumber)) {
-      return item;
-    }
-  });
-
-  return resp[0];
-
-};
-
-const Exercicio = () => {
+const Exercicio = ({ user }) => {
   const param = useParams();
-  const currentTrilha = getTrilhaInfo(param.trilha);
-  const currentExercicio = getExercicioInfo(currentTrilha.exercicios, param.exercicio);
-  
-  const {index, title} = currentExercicio;
+  const [exercicio, setExercicio] = useState({});
+  const [completed, setCompleted] = useState(undefined);
+  const [summaryTrilha, setSummaryTrilha] = useState({});
+
+  const invalidStatus = user ? false : true;
+
+  useEffect(() => {  
+    const getExercicio = async () => {
+      const exercise = await ExercicioService.getExercicioById(param.exercicio);
+
+      if (!ignore) {
+        setExercicio(exercise);
+        setCompleted(exercise.status);
+      }
+    };
+
+    let ignore = false;
+    getExercicio();
+    return () => {
+      ignore = true;
+    };
+
+  }, [param]);
+
+
+  useEffect(() => {
+    const getCurrentTrilha = async () => {
+      const trilha = await SummaryService.getTrilhaById(parseInt(param.id));
+
+      if (!ignore) {
+        setSummaryTrilha(trilha);
+      }
+    };
+
+    let ignore = false;
+    getCurrentTrilha();
+    return () => {
+      ignore = true;
+    };
+  }, [param.id]);
+
+  useEffect(() => {
+    if (!user || !exercicio || completed == null)
+      return;
+    
+    const setStatus = async () => {
+      await ExercicioService.sendExercicioStatus(exercicio.id, completed);
+    };
+
+    setStatus();
+  }, [completed]);
 
   return (
     <>
-      <TrilhaHeader name={currentTrilha.nome} logo={currentTrilha.logo} />
-      <BoxInfo type='exercicios' info={currentTrilha} currentItem={currentExercicio} />
-      <h1>Exercício {index} - {title}</h1>
+      <TrilhaHeader name={summaryTrilha.nome} logo={summaryTrilha.logo} />
+      <Exercise
+        user={user}
+        item={exercicio}
+        trilhaId={param.id}
+        completed={completed}
+        invalidStatus={invalidStatus}
+      />
     </>
   );
 };

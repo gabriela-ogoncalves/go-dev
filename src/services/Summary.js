@@ -36,10 +36,13 @@ const getTrilhaById = async (id) => {
 
       let exercicios = topic.exercises.map((exercise, index) => {
         return {
+          'id': exercise.id,
           'index': index+1,
           'nome': exercise.name,
           'desc': exercise.description,
-          'fonte': exercise.source
+          'fonte': exercise.source,
+          'topico': topic.name,
+          'trilha': path.name
         };
       });
 
