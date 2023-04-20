@@ -12,6 +12,7 @@ const Exercicio = ({ user }) => {
   const [exercicio, setExercicio] = useState({});
   const [completed, setCompleted] = useState(undefined);
   const [summaryTrilha, setSummaryTrilha] = useState({});
+  const [exercisesList, setExcercisesList] = useState([]);
 
   const invalidStatus = user ? false : true;
 
@@ -61,6 +62,21 @@ const Exercicio = ({ user }) => {
     setStatus();
   }, [completed]);
 
+  useEffect(() => {
+    const topics = summaryTrilha && summaryTrilha.topicos;
+    if (topics) {
+      let items = [];
+
+      topics.map((item) => {
+        item.exercicios.map((exercicio) => {
+          items.push(exercicio);
+        });
+      });
+
+      setExcercisesList(items.sort((a, b) => a.id - b.id));
+    }
+  }, [summaryTrilha]);
+
   return (
     <>
       <TrilhaHeader name={summaryTrilha.nome} logo={summaryTrilha.logo} />
@@ -70,6 +86,9 @@ const Exercicio = ({ user }) => {
         trilhaId={param.id}
         completed={completed}
         invalidStatus={invalidStatus}
+        ExercicioService={ExercicioService}
+        exercisesList={exercisesList}
+        param={param}
       />
     </>
   );

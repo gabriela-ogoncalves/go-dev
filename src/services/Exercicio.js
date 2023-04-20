@@ -34,9 +34,9 @@ const getExercicioById = async (id) => {
   }
 };
 
-const sendExercicioStatus = async (id, resposta) => {
+const sendExercicioStatus = async (id, resposta, user) => {
   try {
-    let username = AuthService.getCurrentUser()?.username;
+    let username = user?.username || AuthService.getCurrentUser()?.username;
     if (username)
       await axios.put(API_URL + 'exercise/updateExercise', {username, id, resposta}, { headers: AuthService.getAuthHeader() });
   } catch (error) {

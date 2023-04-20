@@ -1,27 +1,40 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 import Separator from '../Separator/Separator';
+import HappyFace from './HappyFace';
+import SadFace from './SadFace';
 
 import './styles.scss';
 
 const Exercise = ({
   item,
-  trilhaId
+  trilhaId,
+  user,
+  ExercicioService,
+  exercisesList,
+  param
 }) => {
   const LETTER_OPTIONS = ['A', 'B', 'C', 'D', 'E'];
   const baseClass = 'exercise__container__item__answers__answer';
 
+  const [nextItem, setNextItem] = useState();
+
   const [optionSeleted, setOptionSelected] = useState(null);
   const [lastOptionSeleted, setLastOptionSelected] = useState(null);
   const [answer, setAnswer] = useState('');
+  const [showResult, setShowResult] = useState(false);
 
   const activeOption = (e) => {
-    const option = e.target.innerText;
-    const container = document.getElementById(`option-${option}`);
-    
-    if (optionSeleted) setLastOptionSelected(optionSeleted);
-    setOptionSelected(container);
+    if (!showResult) {
+      const option = e.target.innerText;
+      const container = document.getElementById(`option-${option}`);
+      
+      if (optionSeleted) setLastOptionSelected(optionSeleted);
+      setOptionSelected(container);  
+    }
   };
 
   useEffect(() => {
@@ -32,8 +45,17 @@ const Exercise = ({
     }
   }, [optionSeleted]);
 
-  const confirmAnswer = () => {
-    console.log('apertou no botão de confirmar');
+  const confirmAnswer = async () => {
+    await ExercicioService.sendExercicioStatus(item.id, answer, user);
+    setShowResult(true);
+
+    if (item.respostaCerta === answer) {
+      optionSeleted.classList.add('correct');
+    } else {
+      optionSeleted.classList.add('fail');
+      const correctEl = document.getElementById(`option-${item.respostaCerta}`);
+      correctEl.classList.add('correct');
+    }
   };
 
   const removeAnswer = () => {
@@ -43,8 +65,15 @@ const Exercise = ({
     setAnswer('');
   };
 
-  console.log('item: ', item);
-  console.log('answer', answer);
+  useEffect(() => {
+    if (exercisesList) {
+      exercisesList.forEach((exercise, index) => {
+        if (exercise.id === item.id) {
+          if(exercisesList[index+1]) setNextItem(exercisesList[index+1]);
+        }
+      });
+    }
+  }, [exercisesList]);
 
   return (
     <>
@@ -86,36 +115,68 @@ const Exercise = ({
             {answer && answer !== '' && (
               <>
                 <Separator />
-                <div className="exercise__container__item__final-answer">
-                  <p className="exercise__container__item__final-answer__text">
-                    Você marcou a opção <b>{answer}</b>
-                  </p>
-                  <div className="exercise__container__item__final-answer__buttons">
-                    <button
-                      name="button-confirm-answer"
-                      className="exercise__container__item__final-answer__buttons__confirm"
-                      type="submit"
-                      value="Confirmar resposta"
-                      onClick={confirmAnswer}
-                    >
-                      Confirmar resposta
-                    </button>
-                    <button
-                      name="button-cancel-answer"
-                      className="exercise__container__item__final-answer__buttons__cancel"
-                      type="reset"
-                      value="Remover resposta"
-                      onClick={removeAnswer}
-                    >
-                      Remover resposta
-                    </button>
-                  </div>
-                </div>
+                  {
+                    !showResult ? (
+                      <div className="exercise__container__item__final-answer">
+                        <p className="exercise__container__item__final-answer__text">
+                          Você marcou a opção <b>{answer}</b>
+                        </p>  
+                        <div className="exercise__container__item__final-answer__buttons">
+                          <button
+                            name="button-confirm-answer"
+                            className="exercise__container__item__final-answer__buttons__confirm"
+                            type="submit"
+                            value="Confirmar resposta"
+                            onClick={confirmAnswer}
+                          >
+                            Confirmar resposta
+                          </button>
+                          <button
+                            name="button-cancel-answer"
+                            className="exercise__container__item__final-answer__buttons__cancel"
+                            type="reset"
+                            value="Remover resposta"
+                            onClick={removeAnswer}
+                          >
+                            Remover resposta
+                          </button>
+                        </div>
+                      </div>
+                    )
+                    : (
+                      <>
+                        <div className="exercise__container__item__result">
+                          <div className="exercise__container__item__result__icon">
+                            { item.respostaCerta === answer ? <HappyFace /> : <SadFace /> }
+                          </div>
+                          <div className={`exercise__container__item__result__text ${item.respostaCerta === answer ? 'correct' : 'fail'}`}>
+                            RESPOSTA { item.respostaCerta === answer ? 'CORRETA!' : 'ERRADA...' }
+                          </div>
+                        </div>
+                        { answer !== item.respostaCerta && 
+                          <div className="exercise__container__item__result__correct-answer">
+                            A resposta correta é a <b>{item.respostaCerta}</b>.
+                          </div>
+                        }
+                      </>
+                    )
+                  }
               </>
             )}
           </div>
         </fieldset>
       </section>
+
+      {
+        nextItem && (
+          <a className="next-exercise" href={`/trilhas/${param.trilha}/${trilhaId}/exercicios/${nextItem.id}`}>
+            <span className="next-exercise__text">
+              próximo exercício
+            </span>
+            <ArrowForwardIcon />
+          </a>
+        )
+      }
     </>
   );
 };
