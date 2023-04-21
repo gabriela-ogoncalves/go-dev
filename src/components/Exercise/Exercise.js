@@ -27,6 +27,7 @@ const Exercise = ({
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
 
+  // pegando o elemento da opção selecionada egravando na variável "optionSelected"
   const activeOption = (e) => {
     if (!showResult) {
       const option = e.target.innerText;
@@ -37,6 +38,7 @@ const Exercise = ({
     }
   };
 
+  // ativando a opção selecionada como ativa e desativando a última selecionada
   useEffect(() => {
     if (optionSeleted) {
       optionSeleted.classList.add('active');
@@ -45,6 +47,7 @@ const Exercise = ({
     }
   }, [optionSeleted]);
 
+  // função para confirmar a resposta selecionada
   const confirmAnswer = async () => {
     await ExercicioService.sendExercicioStatus(item.id, answer, user);
     setShowResult(true);
@@ -58,6 +61,7 @@ const Exercise = ({
     }
   };
 
+  // função para remover a resposta selecionada
   const removeAnswer = () => {
     optionSeleted.classList.remove('active');
     setOptionSelected(null);
@@ -65,6 +69,7 @@ const Exercise = ({
     setAnswer('');
   };
 
+  // setando as infos do próximo exercício na variável "nextItem"
   useEffect(() => {
     if (exercisesList) {
       exercisesList.forEach((exercise, index) => {
