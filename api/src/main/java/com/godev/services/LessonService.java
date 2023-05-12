@@ -23,7 +23,7 @@ public class LessonService {
 
         if (completed && !lessonRepository.isCompleted(username, lessonId))
                 lessonRepository.setAsCompleted(user.getId(), lessonId);
-        else if (lessonRepository.isCompleted(username, lessonId))
+        else if (!completed && lessonRepository.isCompleted(username, lessonId))
             lessonRepository.setAsNotCompleted(user.getId(), lessonId);
 
         return ResponseEntity.ok(null);

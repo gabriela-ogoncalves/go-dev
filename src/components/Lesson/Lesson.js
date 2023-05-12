@@ -145,7 +145,7 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
                 <input
                   type="checkbox"
                   name="completed"
-                  defaultChecked={completed}
+                  checked={completed}
                   onChange={(e) => setCompleted(e.target.checked)}
                   disabled={invalidStatus}
                 />
