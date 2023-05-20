@@ -9,3 +9,24 @@ export const getStatus = (status) => {
 
   return 'NÃO REALIZADA';
 };
+
+export const getRow = (isSmall) => {
+  if (isSmall || isMobile) {
+    return 1;
+  }
+
+  if (!isSmall || !isMobile) {
+    return 2;
+  }
+};
+
+export const setStyle = (isSmall) => {
+  if (!isMobile && isSmall) {
+    return 'trilho-desktop-small';
+  } else if (isMobile) {
+    return 'trilho-mobile';
+  } else {
+    return '';
+  }
+};
+

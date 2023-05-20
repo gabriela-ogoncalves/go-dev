@@ -91,14 +91,15 @@ const getSummaryByUser = async () => {
 
 const formatTrilhaData = (trilhas) => {
   return trilhas.map((value) => {
+    const trilhaName = value.name || value.nome;
     const formattedData = {
       'id': value.id,
-      'nome': value.name,
+      'nome': trilhaName,
       'area': value.description,
       'status': value.status,
-      'qtdAulas': value.topics.reduce((acc, topic) => acc + topic.lessons.length, 0),
-      'qtdExercicios': value.topics.reduce((acc, topic) => acc + topic.exercises.length, 0),
-      'logo': require(`../assets/logo/trilhas/${value.name.toLowerCase()}-logo.png`),
+      'qtdAulas': value.topics ? value.topics?.reduce((acc, topic) => acc + topic.lessons.length, 0) : value.qtdAulas,
+      'qtdExercicios': value.topics ? value.topics?.reduce((acc, topic) => acc + topic.exercises.length, 0) : value.qtdExercicios,
+      'logo': require(`../assets/logo/trilhas/${trilhaName.toLowerCase()}-logo.png`),
     };
 
     return formattedData;

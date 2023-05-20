@@ -1,14 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../Context.js';
 import LoginForm from '../Login/LoginForm.js';
+import TrilhasProgress from '../TrilhasProgress/TrilhasProgress.js';
 
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 
 import SummaryService from '../../services/Summary.js';
 
+import GraduateBrain from '../../assets/images/graduate-brain.jpg';
 import './styles.scss';
-import TrilhasProgress from '../TrilhasProgress/TrilhasProgress.js';
 
 const ProfileInfo = () => {
   const [user] = useContext(Context);
@@ -44,42 +45,60 @@ const ProfileInfo = () => {
     }
 
     return (
-      <div className='profile-info'>
-        <article className='profile-info__header'>
+      <div className="profile-info">
+        <article className="profile-info__header">
           <Avatar
             sx={{ width: 120, height: 120, bgcolor: 'var(--go-dev-border)' }}
           />
-          <p className='profile-info__header__username'>@{user.username}</p>
-          <p className='profile-info__header__job'>{type} Go Dev</p>
+          <p className="profile-info__header__username">@{user.username}</p>
+          <p className="profile-info__header__job">{type} Go Dev</p>
         </article>
 
-        <article className='profile-info__details'>
-          <p className='profile-info__details__title'>Suas informações</p>
+        <article className="profile-info__details">
+          <p className="profile-info__details__title">Suas informações</p>
           <Divider />
-          <div className='profile-info__details__parts'>
-            <p className='profile-info__details__parts__left'>
+          <div className="profile-info__details__parts">
+            <p className="profile-info__details__parts__left">
               Nome de usuário
             </p>
-            <p className='profile-info__details__parts__right'>
+            <p className="profile-info__details__parts__right">
               {user.username}
             </p>
-            <p className='profile-info__details__parts__left'>E-mail</p>
-            <p className='profile-info__details__parts__right'>{user.email}</p>
-            <p className='profile-info__details__parts__left'>
+            <p className="profile-info__details__parts__left">E-mail</p>
+            <p className="profile-info__details__parts__right">{user.email}</p>
+            <p className="profile-info__details__parts__left">
               Tipo de usuário
             </p>
-            <p className='profile-info__details__parts__right'>{type}</p>
+            <p className="profile-info__details__parts__right">{type}</p>
           </div>
         </article>
 
-        <article className='profile-info__trilhas'>
-          <p className='profile-info__trilhas__title'>Seu desempenho</p>
+        <article className="profile-info__trilhas">
+          <p className="profile-info__trilhas__title">Seu desempenho</p>
           <Divider />
-          <div className='profile-info__trilhas__list'>
-            {userPerfomance && performance && (
-              <TrilhasProgress performance={performance} from='profile-info' />
-            )}
-          </div>
+          {userPerfomance && performance.length > 0 ? (
+            <div className="profile-info__trilhas__list">
+              <TrilhasProgress performance={performance} from="profile-info" />
+            </div>
+          ) : (
+            <div className="profile-info__progress">
+              <p className="profile-info__progress__text">
+                Você ainda não iniciou nenhuma trilha...
+              </p>
+              <a
+                href="/trilhas"
+                role="button"
+                className="profile-info__progress__subtext"
+              >
+                Vamos nessa?
+              </a>
+              <img
+                className="profile-info__progress__image"
+                src={GraduateBrain}
+                alt="cérebro graduado"
+              />
+            </div>
+          )}
         </article>
       </div>
     );

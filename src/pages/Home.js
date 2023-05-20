@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
 import Banner from '../components/Banner/Banner';
 import TrilhasGrid from '../components/Grid/Grid';
 import Informative from '../components/Informative/Informative';
-import HomeService from '../services/Home';
+import { getRow, setStyle } from '../helpers/utils';
 
-const Home = () => {
-  const [trilhas, setTrilhas] = useState('');
+const Home = ({ trilhas }) => {
+  let isSmall;
 
-  useEffect(() => {
-    const getTrilhas = async () => {
-      setTrilhas(null);
-      const response = await HomeService.getTrilhas();
-      if (!ignore) setTrilhas(response);
-    };
-
-    let ignore = false;
-    getTrilhas();
-    return () => {
-      ignore = true;
-    };
-  }, []);
+  if (trilhas) {
+    const type = trilhas.length <= 4 ? 'small' : 'big';
+    isSmall = type === 'small';
+  }
 
   return (
-    <section data-testid='home'>
+    <section data-testid="home">
       <Banner />
-      <TrilhasGrid title='Confira algumas das nossas trilhas' items={trilhas} />
+      {trilhas && (
+        <TrilhasGrid
+          title="Confira algumas das nossas trilhas"
+          items={trilhas}
+          row={getRow(isSmall)}
+          style={setStyle(isSmall)}
+        />
+      )}
       <Informative />
     </section>
   );
