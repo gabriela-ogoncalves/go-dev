@@ -21,17 +21,29 @@ const CertificadosList = () => {
   return (
     <section data-testid='certificados-list' id='certificados-list'>
       <div className='header'>Certificados</div>
-      <div className='list'>
-        {
-          list && list.map((item, index) => {
-            return (
-              <a key={index} className='item' href={`/certificado/${item.id}`}>
-                <span>{item.name}</span>
-              </a>
-            );
-          })
-        }
-      </div>
+      {
+        list && list.lenght > 0 ? (
+          <div className='list'>
+          {
+            list && list.map((item, index) => {
+              return (
+                <a key={index} className='item' href={`/certificado/${item.id}`}>
+                  <span>{item.name}</span>
+                </a>
+              );
+            })
+          }
+          </div>
+        ) : (
+          <div className='message'>
+            <span>Ei! Você ainda não completou uma trilha...</span>
+            <a href={'/trilhas'}>
+              <span>Vou completar agora mesmo!</span>
+            </a>
+
+          </div>
+        )
+      }
     </section>
   );
 };
