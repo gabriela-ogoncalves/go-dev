@@ -5,7 +5,7 @@ import TrilhasGrid from '../components/Grid/Grid';
 import Informative from '../components/Informative/Informative';
 import { getRow, setStyle } from '../helpers/utils';
 
-const Home = ({ trilhas }) => {
+const Home = ({ trilhas, user }) => {
   let isSmall;
 
   if (trilhas) {
@@ -24,7 +24,7 @@ const Home = ({ trilhas }) => {
           style={setStyle(isSmall)}
         />
       )}
-      <Informative />
+      <Informative user={user} />
     </section>
   );
 };

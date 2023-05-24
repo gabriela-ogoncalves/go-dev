@@ -45,7 +45,7 @@ function App() {
         <NavBar />
         <div className='container'>
           <Routes>
-            <Route path='/' element={<Home trilhas={trilhas} />} />
+            <Route path='/' element={<Home trilhas={trilhas} user={user} />} />
             <Route path='/login' element={<Login />} />
             <Route path='/cadastro' element={<Cadastro />} />
             <Route path='/trilhas' element={<Trilhas user={user} trilhas={trilhas} />} />
