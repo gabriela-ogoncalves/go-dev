@@ -50,7 +50,8 @@ function App() {
             <Route path='/cadastro' element={<Cadastro />} />
             <Route path='/trilhas' element={<Trilhas user={user} trilhas={trilhas} />} />
             <Route path='/about' element={<About />} />
-            <Route path='/certificados' element={<Certificados />} />
+            <Route path='/certificados' element={<Certificados user={user} trilhas={trilhas} />} />
+            <Route path='/certificado/:trilha' element={<Certificados user={user} trilhas={trilhas} />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='trilhas/resumo/:trilha' element={<Summary user={user} trilhas={trilhas} />} />
             <Route path='trilhas/:trilha/:id/aulas/:aula' element={<Aula />} />

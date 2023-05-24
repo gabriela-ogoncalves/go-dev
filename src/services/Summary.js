@@ -146,11 +146,20 @@ const getTrilhaByUser = async (id) => {
   }
 };
 
+const getCertificadosList = async () => {
+  const list = await getSummaryByUser();
+
+  if (list && list.completedPaths) {
+    return list.completedPaths;
+  }
+};
+
 const SummaryService = {
   getTrilhaById,
   getSummaryByUser,
   formatTrilhaData,
-  getTrilhaByUser
+  getTrilhaByUser,
+  getCertificadosList
 };
 
 export default SummaryService;
