@@ -11,6 +11,7 @@ const Exercicio = ({ user }) => {
   const param = useParams();
   const [exercicio, setExercicio] = useState({});
   const [completed, setCompleted] = useState(undefined);
+  const [answer, setAnswer] = useState('');
   const [summaryTrilha, setSummaryTrilha] = useState({});
   const [exercisesList, setExcercisesList] = useState([]);
 
@@ -22,6 +23,7 @@ const Exercicio = ({ user }) => {
 
       if (!ignore) {
         setExercicio(exercise);
+        setAnswer(exercise.respostaSelecionada);
         setCompleted(exercise.status);
       }
     };
@@ -56,7 +58,7 @@ const Exercicio = ({ user }) => {
       return;
     
     const setStatus = async () => {
-      await ExercicioService.sendExercicioStatus(exercicio.id, completed);
+      await ExercicioService.sendExercicioStatus(exercicio.id, answer);
     };
 
     setStatus();
@@ -82,6 +84,7 @@ const Exercicio = ({ user }) => {
       <TrilhaHeader name={summaryTrilha.nome} logo={summaryTrilha.logo} />
       <Exercise
         user={user}
+        userAnswer={answer}
         item={exercicio}
         trilhaId={param.id}
         completed={completed}

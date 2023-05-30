@@ -13,6 +13,7 @@ const Exercise = ({
   item,
   trilhaId,
   user,
+  userAnswer,
   ExercicioService,
   exercisesList,
   param
@@ -24,7 +25,7 @@ const Exercise = ({
 
   const [optionSeleted, setOptionSelected] = useState(null);
   const [lastOptionSeleted, setLastOptionSelected] = useState(null);
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState(userAnswer);
   const [showResult, setShowResult] = useState(false);
 
   // pegando o elemento da opção selecionada egravando na variável "optionSelected"

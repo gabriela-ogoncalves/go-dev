@@ -2,6 +2,7 @@ import axios from 'axios';
 import AuthService from './auth.js';
 
 const API_URL = 'http://localhost:8080/api/';
+const VALID_ANSWERS = ['A', 'B', 'C', 'D', 'E'];
 
 const getExercicioById = async (id) => {
   try {
@@ -9,21 +10,22 @@ const getExercicioById = async (id) => {
     let exercise = response.data;
 
     let username = AuthService.getCurrentUser()?.username;
-    let completed = false;
+    let answer = false;
     if (username) {
       let progressReponse = await axios.post(API_URL + 'exercise/progress', {
         username,
         id
       }, { headers: AuthService.getAuthHeader() });
 
-      completed = progressReponse.data;
+      answer = progressReponse.data;
     }
 
     let exercicio = {
       'id': exercise.id,
       'title': exercise.name,
       'desc': exercise.description,
-      'status': completed,
+      'status': VALID_ANSWERS.includes(answer),
+      'respostaSelecionada': VALID_ANSWERS.includes(answer) ? answer : undefined,
       'respostas': exercise.answers,
       'respostaCerta': exercise.correctAnswer
     };
@@ -34,11 +36,11 @@ const getExercicioById = async (id) => {
   }
 };
 
-const sendExercicioStatus = async (id, resposta, user) => {
+const sendExercicioStatus = async (id, answer, user) => {
   try {
     let username = user?.username || AuthService.getCurrentUser()?.username;
     if (username)
-      await axios.put(API_URL + 'exercise/updateExercise', {username, id, resposta}, { headers: AuthService.getAuthHeader() });
+      await axios.put(API_URL + 'exercise/updateExercise', {username, id, answer}, { headers: AuthService.getAuthHeader() });
   } catch (error) {
     console.error(error);
   }
