@@ -10,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,11 +37,11 @@ public class ExerciseController {
     @PostMapping("/progress")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> userProgressByLesson(@Valid @RequestBody ProgressRequest progressRequest) {
-        Boolean isCompleted = exerciseRepository.isCompleted(
+        Optional<Character> completedData = exerciseRepository.isCompleted(
                 progressRequest.getUsername(), progressRequest.getId()
         );
 
-        return ResponseEntity.ok(isCompleted);
+        return ResponseEntity.ok(completedData);
     }
 
     @PutMapping("/updateExercise")

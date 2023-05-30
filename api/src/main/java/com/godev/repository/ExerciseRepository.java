@@ -17,17 +17,11 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     Optional<Exercise> findById(@NonNull Long id);
 
     @Query(value = """
-                select
-                	case when exists (
-                		select 1 from users_exercise ue
-                		join users u on (u.id = ue.user_id)
-                		where u.username = :username and ue.exercise_id = :exerciseId
-                	)
-                	then 'true'
-                	else 'false'
-                	end
+                select answer from users_exercise ue
+                join users u on (u.id = ue.user_id)
+                where u.username = :username and ue.exercise_id = :exerciseId
             """, nativeQuery = true)
-    Boolean isCompleted(@Param("username") String username, @Param("exerciseId") Long exerciseId);
+    Optional<Character> isCompleted(@Param("username") String username, @Param("exerciseId") Long exerciseId);
 
     @Modifying
     @Transactional
