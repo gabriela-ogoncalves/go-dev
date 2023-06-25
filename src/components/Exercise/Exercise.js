@@ -32,11 +32,15 @@ const Exercise = ({
   const activeOption = (e) => {
     if (!showResult) {
       const option = e.target.innerText;
-      const container = document.getElementById(`option-${option}`);
-      
-      if (optionSeleted) setLastOptionSelected(optionSeleted);
-      setOptionSelected(container);  
+      fillOptionSelected(option);
     }
+  };
+
+  const fillOptionSelected = (option) => {
+    const container = document.getElementById(`option-${option}`);
+      
+    if (optionSeleted) setLastOptionSelected(optionSeleted);
+    setOptionSelected(container);  
   };
 
   // ativando a opção selecionada como ativa e desativando a última selecionada
@@ -80,6 +84,13 @@ const Exercise = ({
       });
     }
   }, [exercisesList]);
+
+  useEffect(() => {
+    if (LETTER_OPTIONS.includes(userAnswer)){ 
+      fillOptionSelected(userAnswer);
+      setAnswer(userAnswer);
+    }
+  }, [userAnswer]);
 
   return (
     <>

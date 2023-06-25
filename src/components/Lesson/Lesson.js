@@ -138,7 +138,7 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
           )}
           <div className="lesson__item__title">{currentItem.title}</div>
           <div className="lesson__item__description">{currentItem.desc}</div>
-          <YoutubeEmbed url="https://www.youtube.com/embed/JHO_oIg0OcA" />
+          <YoutubeEmbed url={currentItem.fonte} />
           {
             user && (
               <div className="lesson__status">
