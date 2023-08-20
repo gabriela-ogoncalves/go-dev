@@ -1,6 +1,6 @@
-import { yourProgress } from '../../helpers/lists/yourProgress';
 import { isMobile } from '../../helpers/utils';
 import Grid from '../Grid/Grid';
+import SummaryService from '../../services/Summary';
 
 import './styles.scss';
 
@@ -16,25 +16,31 @@ const getRow = (isSmall) => {
 
 const setStyle = (isSmall) => {
   if (!isMobile && isSmall) {
-    return 'progress-desktop-small';
+    return 'trilho-desktop-small';
   } else if (isMobile) {
-    return 'progress-mobile';
+    return 'trilho-mobile';
   } else {
     return '';
   }
 };
 
-const TrilhasProgress = () => {
-  const type = yourProgress.length <= 4 ? 'small' : 'big';
+const TrilhasProgress = ({
+  performance,
+  from
+}) => {
+  const profileInfo = from === 'profile-info';
+  const data = performance && SummaryService.formatTrilhaData(performance);
+  const type = data.length <= 4 ? 'small' : 'big';
   const isSmall = type === 'small';
 
   return(
     <Grid
-      title='Seu progresso'
-      titleStyle={isMobile && 'title-grid-mobile'}
-      items={yourProgress}
+      title={!profileInfo && 'Seu progresso'}
+      titleStyle={!profileInfo && isMobile && 'title-grid-mobile'}
+      items={data}
       row={getRow(isSmall)}
       style={setStyle(isSmall)}
+      from={from}
     />
   );
 };

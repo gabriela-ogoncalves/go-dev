@@ -6,7 +6,7 @@ import TrilhaHeader from './TrilhaHeader';
 import './styles.scss';
 
 const TrilhaInfo = ({info}) => {
-  const {nome, logo, status} = info;
+  const {nome, logo, status, id} = info;
   const classStatus = status === 'done' ? 'done' : 'progress';
 
   return(
@@ -20,7 +20,7 @@ const TrilhaInfo = ({info}) => {
           TRILHA {getStatus(status)}
         </span>
         <Link
-          to='/certificados'
+          to={`/certificado/${id}`}
           role='button'
           className={`info-status__button${classStatus !== 'done' ? '-disabled' : ''}`}
         >

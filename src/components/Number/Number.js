@@ -1,21 +1,30 @@
 import { Circle, Text, Wrapper } from './styles';
+import { useParams } from 'react-router-dom';
 
-const Number = ({name, type, items, currentItem}) => {
+const Number = ({type, items, currentItem, isLessonScreen, user}) => {
+  const param = useParams();
+
   return(
     <section id='number'>
-      <Wrapper>
+      <Wrapper isLessonScreen={isLessonScreen} >
         {items && items.map((item, i) => {
           const stts = item.status || 'progress';
-          const isCurrentItem = currentItem?.index === item.index;
+          const isCurrentItem = isLessonScreen && currentItem?.id === item.id;
+          const redirect = user ? `/trilhas/${item.trilha}/${param.id || param.trilha}/${type}/${item.id}` : '/login';
 
           return(
             <Circle
               key={i}
               status={stts}
-              href={`/trilhas/${name.toLowerCase()}/${type}/${item.index}`}
+              href={redirect}
               currentItem={isCurrentItem}
             >
-              <Text status={stts}>{item.index}</Text>
+              <Text
+                status={stts}
+                currentItem={isCurrentItem}
+              >
+                { isLessonScreen ? item.id : item.index }
+              </Text>
             </Circle>
           );
         })}

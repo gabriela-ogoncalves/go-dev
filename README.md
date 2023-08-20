@@ -1,31 +1,88 @@
 # Go Dev!
 ![node version](https://img.shields.io/static/v1?label=node&message=v16.16.0&color=blue)
+![jdk version](https://img.shields.io/static/v1?label=JDK&message=v19&color=red)
+![postgresSQL version](https://img.shields.io/static/v1?label=PostgresSQL&message=v15&color=green)
 
-Projeto de final de curso, feito por [Gabriela Gonçalves](https://github.com/gabriela-ogoncalves) e Marco Paulo Cardoso, com as tecnologias:
+Projeto de final de curso, feito por [Gabriela Gonçalves](https://github.com/gabriela-ogoncalves) e [Marco Paulo Cardoso](https://github.com/marcopaulo7), com as tecnologias:
 - [React JS](https://github.com/facebook/create-react-app)
-- [XXX]()
-- [YYY]()
-- [ZZZ]()
+- [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html)
+- [PostgresSQL 15](https://www.postgresql.org/download/)
 
 Implementamos uma plataforma de ensino de programação para pessoas leigas, curiosas, que estão ingressando agora na área de Tecnologia da Informação e para quem deseja aprofundar conceitos. Baseado no conceito do Duolingo, com o Go Dev você pode aprender programação brincando.
 
+## Requisitos
+
+* [JDK](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html)
+* [Postgres 15](https://www.postgresql.org/download/)
+
+### Criando o banco de dados
+
+Crie um banco de dados chamado `godev_db`. Você pode se guiar com a [documentação](https://www.postgresql.org/docs/current/tutorial-createdb.html).
+
 ## Configurando o projeto
 
-Para configurar o projeto, você precisa rodar o comando abaixo:
+Para configurar o `front-end` do projeto, você precisa rodar o comando abaixo:
 
 ```(shell)
 make setup
 ```
 
+Para configurar o `back-end`, caso você esteja usando o sistema operacional **Linux** ou **Mac**, rode o seguinte comando:
+
+```(shell)
+chmod 777 ./mvnw
+```
+
 ## Rodando o projeto
 
-Você pode rodar o projeto utilizando o comando abaixo no seu terminal:
+Você pode rodar o `front-end` do projeto utilizando o comando abaixo no seu terminal:
 
 ```(shell)
 make run
 ```
 
 Para visualizar no navegador, acesse a URL [`http://localhost:3000`](http://localhost:3000).
+
+Para rodar o `back-end`, primeiro será necessário executar o banco de dados e depois a API.
+
+Para executar o **banco de dados**, execute os seguintes comandos:
+
+```(shell)
+sudo -u postgres psql
+```
+
+O comando acima abrirá o postgres. Sendo assim, será necessário abrir ou criar o banco de dados do go dev.
+
+Caso ainda não tenha criado o banco de dados, rode os comandos:
+
+```(shell)
+CREATE DATABASE godev_db;
+```
+
+Para executar o banco, execute o comando:
+
+```(shell)
+\c godev_db
+```
+
+Você deve receber a mensagem `You are now connected to database "godev_db" as user "postgres".` ou algo semelhante.
+
+
+Para iniciar a **API** entre na pasta api:
+
+```(shell)
+cd api/
+```
+
+E rode o comando abaixo no terminal:
+
+```(shell)
+./mvnw spring-boot:run
+```
+
+## Visualização do Banco de Dados
+
+Para facilitar a  visualização do banco de dados e das tabelas e registros, sugerimos a instalação da ferramenta [DBeaver](https://dbeaver.io/download/). Para configuração, utilize o nome do banco de dados criado (godev_bd)
 
 ## Testes
 
@@ -34,68 +91,3 @@ Foram implementados testes unitários, que podem ser executados através do coma
 ```(shell)
 make test
 ```
-
------------------------------------------------------------------------------------------
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

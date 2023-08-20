@@ -3,21 +3,27 @@ import './styles.scss';
 
 const BoxInfo = (props) => {
   const { type } = props;
-  const { aulas, exercicios } = props.info;
 
-  const title = type === 'aulas' ? 'Aulas' : 'Exercícios'; 
+  const lessons = props.items || props.info.aulas;
+  const exercises = props.items || props.info.exercicios;
+
+  const title = type === 'aulas' ? 'Aulas' : 'Exercícios';
+
+  const isLessonScreen = props.screen === 'lesson';
+  const classBase = isLessonScreen ? 'box-info-lesson' : 'box-info';
 
   return(
     <section id='box-info'>
-      <fieldset>
-        <legend>{title}</legend>
+      <div className={`${classBase}__container`}>
+        <span className={`${classBase}__container__title`}>{title}</span>
         <Number
-          name={props.info.nome}
           type={type}
-          items={type === 'aulas' ? aulas : exercicios}
+          items={type === 'aulas' ? lessons : exercises}
           currentItem={props.currentItem}
+          isLessonScreen={isLessonScreen}
+          user={props.user}
         />
-      </fieldset>
+      </div>
     </section>
   );
 };

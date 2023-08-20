@@ -1,10 +1,10 @@
 package com.godev.services;
 
-import com.godev.models.ERole;
-import com.godev.models.Role;
-import com.godev.models.User;
+import com.godev.models.*;
 import com.godev.payloads.JwtResponse;
 import com.godev.payloads.MessageResponse;
+import com.godev.payloads.ProgressResponse;
+import com.godev.repository.PathRepository;
 import com.godev.repository.RoleRepository;
 import com.godev.repository.UserRepository;
 import com.godev.security.UserDetailsImpl;
@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,23 +27,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class AuthenticationService extends UserDetailsServiceImpl {
+public class UserService extends UserDetailsServiceImpl {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder encoder;
     private final JwtUtils jwtUtils;
     private final RoleRepository roleRepository;
+    private final PathRepository pathRepository;
 
-    public AuthenticationService(
+    public UserService(
             AuthenticationManager authenticationManager,
             JwtUtils jwtUtils,
             PasswordEncoder encoder,
             RoleRepository roleRepository,
+            PathRepository pathRepository,
             UserRepository userRepository) {
         super(userRepository);
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
         this.roleRepository = roleRepository;
+        this.pathRepository = pathRepository;
     }
 
     public ResponseEntity<JwtResponse> authenticateUser(String username, String password) {
@@ -112,5 +116,38 @@ public class AuthenticationService extends UserDetailsServiceImpl {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    public ResponseEntity<ProgressResponse> userProgress(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+        List<Path> paths = pathRepository.findAll();
+        Set<Long> userLessonIds = user.getLessons().stream().map(Lesson::getId).collect(Collectors.toSet());
+        Set<Long> userExerciseIds = user.getExercises().stream().map(Exercise::getId).collect(Collectors.toSet());
+
+        ProgressResponse response = new ProgressResponse(username);
+        paths.forEach(path -> {
+            Set<Long> lessonIds = path.getTopics().stream().flatMap(
+                    topic -> topic.getLessons().stream().map(Lesson::getId)
+            ).collect(Collectors.toSet());
+
+            Set<Long> exerciseIds = path.getTopics().stream().flatMap(
+                    topic -> topic.getExercises().stream().map(Exercise::getId)
+            ).collect(Collectors.toSet());
+
+            if (userLessonIds.containsAll(lessonIds)) {
+                if (userExerciseIds.containsAll(exerciseIds))
+                    response.completedPaths.add(path);
+                else
+                    response.completedLessonsPaths.add(path);
+            }
+            else if (userExerciseIds.containsAll(exerciseIds))
+                response.completedExercisesPaths.add(path);
+            else
+                response.uncompletedPaths.add(path);
+        });
+
+        return ResponseEntity.ok(response);
     }
 }

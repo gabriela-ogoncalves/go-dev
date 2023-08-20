@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/bungee');
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 :root {
   --go-dev-background: #E3CAE8;
@@ -7,6 +8,7 @@
   --go-dev-border: #734A99;
   --bungee-font: 'Bungee', sans-serif;
   --poppins-font: 'Poppins', sans-serif;
+  --open-sans: 'Open Sans', sans-serif;
   --color-dark-blue: #2b353f;
   --color-purple: #36324f;
   --color-dark-purple: #332546;
@@ -21,9 +23,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--open-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

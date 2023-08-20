@@ -1,4 +1,13 @@
+.go-dev {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: 'header' 'content' 'footer';
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
 .container {
   margin: 1rem;
   text-align: center;
+  grid-area: content;
 }

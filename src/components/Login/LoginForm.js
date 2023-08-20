@@ -17,12 +17,12 @@ export default function LoginForm() {
       if (e.response.status === 401)
         setError('login', {
           type: 'server',
-          message: 'Usuário não encontrado.',
+          message: 'Usuário e/ou senha incorreto(s).',
         });
       else
         setError('login', {
           type: 'server',
-          message: 'Something went wrong with login',
+          message: 'Algo deu errado :( Por favor, tente novamente mais tarde.',
         });
     }
   };
@@ -79,9 +79,14 @@ export default function LoginForm() {
           
           {errors.login &&
             <div className='login__error'>
-              errors.login.message
+              {errors.login.message}
             </div>
           }
+
+          <div className='login__sign-up'>
+            <p>Ainda não possui uma conta?</p>
+            <a href='/cadastro'>Cadastre-se gratuitamente aqui</a>            
+          </div>
         </form>
       </div>
     </div>

@@ -1,14 +1,30 @@
+import React from 'react';
+
 import Banner from '../components/Banner/Banner';
 import TrilhasGrid from '../components/Grid/Grid';
 import Informative from '../components/Informative/Informative';
-import { trilhas } from '../helpers/lists/trilhas';
+import { getRow, setStyle } from '../helpers/utils';
 
-const Home = () => {
+const Home = ({ trilhas, user }) => {
+  let isSmall;
+
+  if (trilhas) {
+    const type = trilhas.length <= 4 ? 'small' : 'big';
+    isSmall = type === 'small';
+  }
+
   return (
-    <section data-testid='home'>
+    <section data-testid="home">
       <Banner />
-      <TrilhasGrid title='Confira algumas das nossas trilhas' items={trilhas} />
-      <Informative />
+      {trilhas && (
+        <TrilhasGrid
+          title="Confira algumas das nossas trilhas"
+          items={trilhas}
+          row={getRow(isSmall)}
+          style={setStyle(isSmall)}
+        />
+      )}
+      <Informative user={user} />
     </section>
   );
 };

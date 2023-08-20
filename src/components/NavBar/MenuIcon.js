@@ -5,6 +5,8 @@ export default function MenuIcon() {
           className='h-5 w-5'
           viewBox='0 0 20 20'
           fill='white'
+          width={26}
+          height={26}
         >
           <path
             fillRule='evenodd'

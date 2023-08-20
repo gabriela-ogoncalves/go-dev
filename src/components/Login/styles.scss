@@ -4,7 +4,7 @@
     width: 100%;
     margin: auto;
     padding: 5rem;
-    justify-content: space-around;
+    justify-content: center;
 
     &__title {
         font-weight: 700;
@@ -36,8 +36,9 @@
     &__error {
         margin-bottom: 10%;
         color: red;
-        font-weight: 500;
+        font-weight: 600;
         letter-spacing: 0.03rem;
+        line-height: 1.25rem;
     }
 
     &__button {
@@ -83,5 +84,20 @@
             outline: none;
             box-shadow: inset 0px 0px 5px #c1c1c1;
           }
+    }
+
+    &__sign-up {
+        gap: 1em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        p {
+            margin: 0;
+        }
+
+        a {
+            margin-bottom: 1em;
+        }
     }
 }

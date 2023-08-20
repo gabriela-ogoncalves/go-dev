@@ -1,4 +1,5 @@
 .navigation {
+    grid-area: header;
     position: relative;
     display: flex;
     align-items: center;
@@ -28,6 +29,7 @@
     ul {
         display: flex;
         padding: 0;
+        margin: 0;
     }
 
     li {
@@ -55,6 +57,12 @@
             color: var(--go-dev-text);        
         }
       }
+
+    &__logout {
+      @media screen and (max-width: 700px) {
+        height: 65px;
+      }
+    }
   }
   
   .hamburger {
@@ -92,6 +100,7 @@
             background-color: white;
             border-top: 1px solid black;
             display: none;
+            margin-top: 0.875rem;
         }
 
         li {
@@ -112,7 +121,20 @@
   
     .navigation-menu.expanded ul {
       display: block;
-      z-index: 1;
+      z-index: 2;
+      padding: 1rem;
     }
   }
   
+  .swal-text {
+    line-height: 1.5rem;
+    text-align: center;
+  }
+
+  .swal-button--confirm {
+    background-color: var(--go-dev-border);
+  }
+
+  .user-status-menu {
+    font-family: monospace;
+  }

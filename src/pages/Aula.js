@@ -1,43 +1,64 @@
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import BoxInfo from '../components/Summary/BoxInfo';
+import Lesson from '../components/Lesson/Lesson';
 import TrilhaHeader from '../components/Summary/TrilhaHeader';
-import { yourProgress } from '../helpers/lists/yourProgress';
-
-const getTrilhaInfo = (trilhaName) => {
-  const resp = yourProgress.filter(trilha => {
-    if (trilha.nome.toLowerCase() === trilhaName) {
-      return trilha;
-    }
-  });
-
-  return resp[0];
-};
-
-const getAulaInfo = (aulas, aulaNumber) => {
-  const resp = aulas.filter(aula => {
-    if (aula.index === parseInt(aulaNumber)) {
-      return aula;
-    }
-  });
-
-  return resp[0];
-
-};
+import AulaService from '../services/Aula';
+import SummaryService from '../services/Summary';
 
 const Aula = () => {
   const param = useParams();
-  console.log('param', param);
-  const currentTrilha = getTrilhaInfo(param.trilha);
-  console.log('currentTrilha', currentTrilha);
+  const [aula, setAula] = useState({});
+  /* eslint-disable-next-line */
+  const [topico, setTopico] = useState({});
+  const [summaryTrilha, setSummaryTrilha] = useState({});
 
-  const currentAula = getAulaInfo(currentTrilha.aulas, param.aula);
-  const {index, title} = currentAula;
+  useEffect(() => {
+    const getAula = async () => {
+      const aula = await AulaService.getAulaById(param.aula);
+      const topico = aula && await AulaService.getTopicoById(aula.topic_id, param.trilha);
+
+      if (!ignore) {
+        setAula(aula);
+        setTopico(topico);
+      }
+    };
+
+    let ignore = false;
+    getAula();
+    return () => {
+      ignore = true;
+    };
+  }, [param]);
+
+
+  useEffect(() => {
+    const getCurrentTrilha = async () => {
+      const trilha = await SummaryService.getTrilhaById(parseInt(param.id));
+
+      if (!ignore) {
+        setSummaryTrilha(trilha);
+      }
+    };
+
+    let ignore = false;
+    getCurrentTrilha();
+    return () => {
+      ignore = true;
+    };
+  }, [param.id]);
+
+
+  const currentTrilha = {
+    nome: param.trilha,
+    logo: require(`../assets/logo/trilhas/${param.trilha.toLowerCase()}-logo.png`),
+  };
+
+  const topics = summaryTrilha?.topicos?.sort((a, b) => a.id - b.id);
 
   return (
     <>
       <TrilhaHeader name={currentTrilha.nome} logo={currentTrilha.logo} />
-      <BoxInfo type='aulas' info={currentTrilha} currentItem={currentAula} />
-      <h1>Aula {index} - {title}</h1>
+      <Lesson topics={topics} currentItem={aula} trilhaId={param.id} />
     </>
   );
 };

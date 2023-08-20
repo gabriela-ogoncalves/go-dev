@@ -1,5 +1,6 @@
 package com.godev.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,6 +20,7 @@ public class Lesson {
     private String source;
     @ManyToOne
     @JoinColumn(name="topic", nullable=false)
+    @JsonBackReference
     private Topic topic;
 
     public Lesson() {    }
@@ -50,4 +52,6 @@ public class Lesson {
     public Topic getTopic() { return topic; }
 
     public void setTopic(Topic topic) { this.topic = topic; }
+
+    public Long getTopicId() { return topic.getId(); }
 }
