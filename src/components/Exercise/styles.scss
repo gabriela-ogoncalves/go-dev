@@ -47,6 +47,10 @@
         align-self: start;
         text-align: start;
 
+        .disable-events {
+          pointer-events: none;
+        }
+
         &__answer {
           display: grid;
           flex-direction: row;
