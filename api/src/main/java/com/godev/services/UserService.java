@@ -136,13 +136,14 @@ public class UserService extends UserDetailsServiceImpl {
                     topic -> topic.getExercises().stream().map(Exercise::getId)
             ).collect(Collectors.toSet());
 
-            if (userLessonIds.containsAll(lessonIds)) {
-                if (userExerciseIds.containsAll(exerciseIds))
-                    response.completedPaths.add(path);
-                else
-                    response.completedLessonsPaths.add(path);
-            }
-            else if (userExerciseIds.containsAll(exerciseIds))
+            boolean allLessonsCompleted = userLessonIds.containsAll(lessonIds);
+            boolean allExercisesCompleted = userExerciseIds.containsAll(exerciseIds);
+
+            if (allLessonsCompleted && allExercisesCompleted)
+                response.completedPaths.add(path);
+            else if (allLessonsCompleted)
+                response.completedLessonsPaths.add(path);
+            else if (allExercisesCompleted)
                 response.completedExercisesPaths.add(path);
             else
                 response.uncompletedPaths.add(path);
