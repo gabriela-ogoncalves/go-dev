@@ -27,5 +27,17 @@ public interface PathRepository extends JpaRepository<Path, Long> {
               join topic t on (t.id = l.topic)
               join "path" p on (p.id = t."path")
               where p.id = :pathId);""", nativeQuery = true)
-    List<Long> findUserProgressByPathId(@Param("username") String username, @Param("pathId") Long pathId);
+    List<Long> findUserLessonProgressByPathId(@Param("username") String username, @Param("pathId") Long pathId);
+
+    @Query(value = """
+            select exercise_id from users_exercise ue
+            join users u on (u.id = ul.user_id)
+            where u.username = :username and
+            ue.exercise_id in (
+              select e.id from exercise e
+              join topic t on (t.id = e.topic)
+              join "path" p on (p.id = t."path")
+              where p.id = :pathId);""", nativeQuery = true)
+    List<Long> findUserExerciseProgressByPathId(@Param("username") String username, @Param("pathId") Long pathId);
+
 }

@@ -2,6 +2,7 @@ package com.godev.controllers;
 
 import com.godev.models.Path;
 import com.godev.payloads.ProgressRequest;
+import com.godev.payloads.ProgressResponse;
 import com.godev.repository.PathRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +40,17 @@ public class PathController {
     @PostMapping("/progress")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> userProgressByPath(@Valid @RequestBody ProgressRequest progressRequest) {
-        List<Long> lessonIds = pathRepository.findUserProgressByPathId(
+        List<Long> lessonIds = pathRepository.findUserLessonProgressByPathId(
                 progressRequest.getUsername(), progressRequest.getId()
         );
 
-        return ResponseEntity.ok(lessonIds);
+        List<Long> exerciseIds = pathRepository.findUserExerciseProgressByPathId(
+                progressRequest.getUsername(), progressRequest.getId()
+        );
+
+        ProgressResponse progressResponse = new ProgressResponse(progressRequest.getUsername());
+        progressResponse.completedLessonIds.addAll(lessonIds);
+        progressResponse.completedExerciseIds.addAll(exerciseIds);
+        return ResponseEntity.ok(progressResponse);
     }
 }

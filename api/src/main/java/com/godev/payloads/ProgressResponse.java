@@ -19,4 +19,6 @@ public class ProgressResponse {
     public List<Path> completedLessonsPaths;
     public List<Path> completedExercisesPaths;
     public List<Path> uncompletedPaths;
+    public List<Long> completedLessonIds;
+    public List<Long> completedExerciseIds;
 }

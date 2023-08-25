@@ -10,13 +10,15 @@ const getTrilhaById = async (id) => {
 
     let username = AuthService.getCurrentUser()?.username;
     let completedLessonIds = new Set();
+    let completedExerciseIds = new Set();
     if (username) {
       let progressReponse = await axios.post(API_URL + 'path/progress', {
         username,
         id
       }, { headers: AuthService.getAuthHeader() });
 
-      completedLessonIds = new Set(progressReponse.data);
+      completedLessonIds = new Set(progressReponse.data.completedLessonIds);
+      completedExerciseIds = new Set(progressReponse.data.completedExerciseIds);
     }
 
     let topicos = [];
