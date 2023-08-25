@@ -12,6 +12,8 @@ public class ProgressResponse {
         this.completedLessonsPaths = new ArrayList<>();
         this.completedExercisesPaths = new ArrayList<>();
         this.uncompletedPaths = new ArrayList<>();
+        this.completedLessonIds = new ArrayList<>();
+        this.completedExerciseIds = new ArrayList<>();
     }
 
     public String username;

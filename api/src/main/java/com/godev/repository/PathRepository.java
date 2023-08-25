@@ -19,7 +19,7 @@ public interface PathRepository extends JpaRepository<Path, Long> {
     Optional<Path> findById(@NonNull Long id);
 
     @Query(value = """
-            select lesson_id  from users_lesson ul
+            select lesson_id from users_lesson ul
             join users u on (u.id = ul.user_id)
             where u.username = :username and
             ul.lesson_id in (
@@ -31,7 +31,7 @@ public interface PathRepository extends JpaRepository<Path, Long> {
 
     @Query(value = """
             select exercise_id from users_exercise ue
-            join users u on (u.id = ul.user_id)
+            join users u on (u.id = ue.user_id)
             where u.username = :username and
             ue.exercise_id in (
               select e.id from exercise e
