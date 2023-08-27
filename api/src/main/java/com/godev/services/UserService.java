@@ -145,7 +145,8 @@ public class UserService extends UserDetailsServiceImpl {
                 response.completedLessonsPaths.add(path);
             else if (allExercisesCompleted)
                 response.completedExercisesPaths.add(path);
-            else
+            else if (lessonIds.stream().anyMatch(userLessonIds::contains) ||
+                    exerciseIds.stream().anyMatch(userExerciseIds::contains))
                 response.uncompletedPaths.add(path);
         });
 
