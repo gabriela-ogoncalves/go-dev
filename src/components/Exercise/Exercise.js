@@ -4,14 +4,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import Separator from '../Separator/Separator';
-import HappyFace from './HappyFace';
-import SadFace from './SadFace';
+import FeedbackExercise from './FeedbackExercise';
 
 import './styles.scss';
 
 const Exercise = ({
   item,
   trilhaId,
+  completed,
   user,
   userAnswer,
   ExercicioService,
@@ -27,6 +27,22 @@ const Exercise = ({
   const [lastOptionSeleted, setLastOptionSelected] = useState(null);
   const [answer, setAnswer] = useState(userAnswer);
   const [showResult, setShowResult] = useState(false);
+
+  const coloringOptions = () => {
+    if (optionSeleted) {
+      if (item.respostaCerta === answer) {
+        optionSeleted.classList.add('correct');
+      } else {
+        optionSeleted.classList.add('fail');
+        const correctEl = document.getElementById(`option-${item.respostaCerta}`);
+        correctEl.classList.add('correct');
+      }
+    }
+  };
+
+  if (completed) {
+    coloringOptions();
+  }
 
   // pegando o elemento da opção selecionada egravando na variável "optionSelected"
   const activeOption = (e) => {
@@ -56,14 +72,7 @@ const Exercise = ({
   const confirmAnswer = async () => {
     await ExercicioService.sendExercicioStatus(item.id, answer, user);
     setShowResult(true);
-
-    if (item.respostaCerta === answer) {
-      optionSeleted.classList.add('correct');
-    } else {
-      optionSeleted.classList.add('fail');
-      const correctEl = document.getElementById(`option-${item.respostaCerta}`);
-      correctEl.classList.add('correct');
-    }
+    coloringOptions();
   };
 
   // função para remover a resposta selecionada
@@ -116,7 +125,7 @@ const Exercise = ({
                 item.respostas &&
                 item.respostas.map((option, index) => {
                   return (
-                    <div key={index} className={baseClass}>
+                    <div key={index} className={completed ? `${baseClass} disable-events` : baseClass }>
                       <span
                         id={`option-${LETTER_OPTIONS[index]}`}
                         className={`${baseClass}__letter`}
@@ -132,52 +141,13 @@ const Exercise = ({
             {answer && answer !== '' && (
               <>
                 <Separator />
-                  {
-                    !showResult ? (
-                      <div className="exercise__container__item__final-answer">
-                        <p className="exercise__container__item__final-answer__text">
-                          Você marcou a opção <b>{answer}</b>
-                        </p>  
-                        <div className="exercise__container__item__final-answer__buttons">
-                          <button
-                            name="button-confirm-answer"
-                            className="exercise__container__item__final-answer__buttons__confirm"
-                            type="submit"
-                            value="Confirmar resposta"
-                            onClick={confirmAnswer}
-                          >
-                            Confirmar resposta
-                          </button>
-                          <button
-                            name="button-cancel-answer"
-                            className="exercise__container__item__final-answer__buttons__cancel"
-                            type="reset"
-                            value="Remover resposta"
-                            onClick={removeAnswer}
-                          >
-                            Remover resposta
-                          </button>
-                        </div>
-                      </div>
-                    )
-                    : (
-                      <>
-                        <div className="exercise__container__item__result">
-                          <div className="exercise__container__item__result__icon">
-                            { item.respostaCerta === answer ? <HappyFace /> : <SadFace /> }
-                          </div>
-                          <div className={`exercise__container__item__result__text ${item.respostaCerta === answer ? 'correct' : 'fail'}`}>
-                            RESPOSTA { item.respostaCerta === answer ? 'CORRETA!' : 'ERRADA...' }
-                          </div>
-                        </div>
-                        { answer !== item.respostaCerta && 
-                          <div className="exercise__container__item__result__correct-answer">
-                            A resposta correta é a <b>{item.respostaCerta}</b>.
-                          </div>
-                        }
-                      </>
-                    )
-                  }
+                <FeedbackExercise
+                  showFeedback={showResult || completed}
+                  item={item}
+                  answer={answer}
+                  confirmAnswer={confirmAnswer}
+                  removeAnswer={removeAnswer}
+                />
               </>
             )}
           </div>

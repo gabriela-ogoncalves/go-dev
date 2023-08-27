@@ -44,7 +44,8 @@ const getTrilhaById = async (id) => {
           'desc': exercise.description,
           'fonte': exercise.source,
           'topico': topic.name,
-          'trilha': path.name
+          'trilha': path.name,
+          'status': completedExerciseIds.has(exercise.id) ? 'done' : 'progress',
         };
       });
 

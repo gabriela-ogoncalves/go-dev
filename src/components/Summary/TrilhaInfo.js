@@ -7,7 +7,7 @@ import './styles.scss';
 
 const TrilhaInfo = ({info}) => {
   const {nome, logo, status, id} = info;
-  const classStatus = status === 'done' ? 'done' : 'progress';
+  const classStatus = status === 'done' ? status : 'progress';
 
   return(
     <section id='summary-trilha-info' >

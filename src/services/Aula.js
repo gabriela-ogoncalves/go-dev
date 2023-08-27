@@ -70,7 +70,8 @@ const getTopicoById = async (id, trilhaName) => {
         'index': index + 1,
         'nome': exercise.name,
         'desc': exercise.description,
-        'fonte': exercise.source
+        'fonte': exercise.source,
+        'status': completedExerciseIds.has(exercise.id) ? 'done' : 'progress',
       };
     });
 
