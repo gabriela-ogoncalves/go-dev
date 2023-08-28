@@ -22,7 +22,7 @@ const CertificadosList = () => {
     <section data-testid='certificados-list' id='certificados-list'>
       <div className='header'>Certificados</div>
       {
-        list && list.lenght > 0 ? (
+        list && list.length > 0 ? (
           <div className='list'>
           {
             list && list.map((item, index) => {
