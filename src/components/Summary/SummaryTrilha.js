@@ -27,12 +27,12 @@ const SummaryTrilha = (props) => {
     <section id='summary-trilha'>
       <TrilhaInfo info={trilhaInfo} />
       <section className='summary-trilha-group'>
-        {topics && topics.map(topico => {
+        {topics && topics.map((topico, index) => {
           return(
             <fieldset key={topico.id} className='summary-trilha'>
               <legend className='summary-trilha__badge'>
                 <span className='summary-trilha__badge__text'>
-                  TÓPICO {topico.id}
+                  TÓPICO {index+1}
                 </span>
               </legend>
               <div className='summary-trilha__container'>

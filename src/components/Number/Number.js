@@ -23,7 +23,7 @@ const Number = ({type, items, currentItem, isLessonScreen, user}) => {
                 status={stts}
                 currentItem={isCurrentItem}
               >
-                { isLessonScreen ? item.id : item.index }
+                { isLessonScreen ? i+1 : item.index }
               </Text>
             </Circle>
           );

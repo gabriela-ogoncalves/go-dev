@@ -90,6 +90,10 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
 
   const isLastItem = lessons.length > 0 && lessons.slice(-1)[0].id === currentItem.id;
 
+  const lessonIndex = lessons.findIndex(item => {
+    return item.id === currentItem.id;
+  })+1;
+
   return (
     <>
       <a className="back-screen" href={`/trilhas/resumo/${trilhaId}`}>
@@ -101,14 +105,14 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
       <div id="lesson">
         <div className="lesson__topics">
           {topics &&
-            topics.map((item) => {
+            topics.map((item, index) => {
               return (
                 <div key={item.id} className="lesson__topics__topic">
                   <span className="lesson__topics__topic__text">
-                    TÓPICO {item.id}
+                    TÓPICO {index+1}
                   </span>
                   {item &&
-                    item.aulas.map((aula) => {
+                    item.aulas.map((aula, index) => {
                       const isActive = aula.id === currentItem.id;
                       const classBase = isActive
                         ? 'lesson__topics__lessons__active'
@@ -123,7 +127,7 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
                           href={`${aula.id}`}
                         >
                           <span className="lesson__topics__lessons__text">
-                            Aula {aula.id}
+                            Aula {index+1}
                           </span>
                         </a>
                       );
@@ -134,7 +138,7 @@ export default function Lesson({ topics, currentItem, trilhaId }) {
         </div>
         <div className="lesson__item">
           {isMobile && (
-            <div className="lesson__badge">AULA {currentItem.id}</div>
+            <div className="lesson__badge">AULA {lessonIndex !== 0 && lessonIndex}</div>
           )}
           <div className="lesson__item__title">{currentItem.title}</div>
           <div className="lesson__item__description">{currentItem.desc}</div>
