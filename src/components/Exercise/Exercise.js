@@ -101,6 +101,10 @@ const Exercise = ({
     }
   }, [userAnswer]);
 
+  const exerciceIndex = exercisesList.findIndex(el => {
+    return el.id === item.id;
+  })+1;
+  
   return (
     <>
       <a className="back-screen" href={`/trilhas/resumo/${trilhaId}`}>
@@ -113,7 +117,7 @@ const Exercise = ({
       <section className="exercise">
         <fieldset className="exercise__container">
           <legend className="exercise__container__header">
-            EXERCÍCIO {item.id}
+            EXERCÍCIO {exerciceIndex !== 0 && exerciceIndex}
           </legend>
           <div className="exercise__container__item">
             <div className="exercise__container__item__title">{item.title}</div>
